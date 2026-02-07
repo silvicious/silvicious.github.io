@@ -1,12 +1,12 @@
 // Project data
 const projects = {
     1: {
-        title: "Future Skins",
-        category: "Speculative Design",
+        title: "uvw",
+        category: "Digital Fashion",
         shortDescription: "Exploring the intersection of bio-tech and fashion, imagining garments that adapt to our bodies and environments in speculative futures.",
-        overview: "Future Skins is a speculative design project that imagines how biotechnology and fashion could merge. The project explores adaptive garments that respond to environmental conditions and bodily needs, creating a narrative around human-technology integration in fashion.",
-        process: "The design process involved research into bio-responsive materials, interviews with biotech experts, and iterative digital prototyping. We used 3D modeling and animation to visualize how these adaptive garments might function in different scenarios.",
-        outcome: "The project resulted in a series of digital designs and a speculative video showing the garments in use, which was presented at multiple design conferences and featured in digital fashion publications.",
+        overview: "The uvw is a digital fashion collection inspired by the interplay of light and matter in physical versus digital realities.",
+        process: "Light in the physical world is governed by physical laws, while in computer graphics, light knows no bounds.",
+        outcome: "Inspired by the limitless possibilities of the digital medium, I explore the potential of using light as a material to create garments that transcend the constraints of physical materials. The aim is to explore the transformative power of light and the potential for fashion to exist beyond its static nature.",
         images: [
             "https://via.placeholder.com/800x600?text=Future+Skins+1",
             "https://via.placeholder.com/800x600?text=Future+Skins+2",

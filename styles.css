@@ -59,7 +59,7 @@ a {
 }
 
 .logo h1 {
-    font-size: 1.8rem;
+    font-size: 1.4rem;
     font-weight: 400;
     letter-spacing: 0.05em;
     color: #0a0a0a;
@@ -125,10 +125,6 @@ a {
     pointer-events: none;
 }
 
-.navbar.scrolled .logo h1 {
-    font-size: 1.4rem;
-}
-
 /* ==================== Hero Section ==================== */
 .hero {
     position: relative;
@@ -137,7 +133,8 @@ a {
     align-items: center;
     justify-content: flex-start;
     overflow: hidden;
-    background: linear-gradient(135deg, #0a0a0a 0%, #1a1a1a 100%);
+    background: url('images/hero-background.png') center/cover no-repeat;
+    background-attachment: fixed;
     color: white;
     padding: 0 60px;
 }
