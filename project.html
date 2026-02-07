@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Project - silviciouƨ</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="project-styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="container">
+            <div class="nav-wrapper">
+                <div class="logo">
+                    <h1>silviciou<span class="rotating-s">s</span></h1>
+                </div>
+                <a href="index.html" class="back-link">← Back</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Project Section -->
+    <section class="project-section">
+        <div class="container">
+            <div class="project-content">
+                <!-- Slider -->
+                <div class="slider-container">
+                    <div class="slider-wrapper">
+                        <div class="slides">
+                            <div class="slide active">
+                                <img src="https://via.placeholder.com/800x600?text=Project+Image+1" alt="Project image 1">
+                            </div>
+                            <div class="slide">
+                                <img src="https://via.placeholder.com/800x600?text=Project+Image+2" alt="Project image 2">
+                            </div>
+                            <div class="slide">
+                                <img src="https://via.placeholder.com/800x600?text=Project+Image+3" alt="Project image 3">
+                            </div>
+                        </div>
+                        <button class="slider-nav prev" id="prevBtn">
+                            <i class="fas fa-chevron-left"></i>
+                        </button>
+                        <button class="slider-nav next" id="nextBtn">
+                            <i class="fas fa-chevron-right"></i>
+                        </button>
+                        <div class="slider-indicators">
+                            <div class="indicator active" data-index="0"></div>
+                            <div class="indicator" data-index="1"></div>
+                            <div class="indicator" data-index="2"></div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Project Info -->
+                <div class="project-info">
+                    <h1 id="project-title">Project Title</h1>
+                    <p class="project-category" id="project-category">Category</p>
+                    
+                    <div class="project-description" id="project-description">
+                        <p>Project description goes here</p>
+                    </div>
+
+                    <div class="project-details">
+                        <div class="detail-group">
+                            <h3>Overview</h3>
+                            <p id="project-overview">Detailed project overview</p>
+                        </div>
+                        
+                        <div class="detail-group">
+                            <h3>Process</h3>
+                            <p id="project-process">Project process and methodology</p>
+                        </div>
+                        
+                        <div class="detail-group">
+                            <h3>Outcome</h3>
+                            <p id="project-outcome">Project outcomes and results</p>
+                        </div>
+                    </div>
+
+                    <a href="index.html#portfolio" class="back-button">← Back to Portfolio</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section footer-section-left">
+                    <div class="social-links">
+                        <a href="#" title="LinkedIn" target="_blank"><i class="fab fa-linkedin"></i></a>
+                        <a href="#" title="Instagram" target="_blank"><i class="fab fa-instagram"></i></a>
+                        <a href="#" title="Threads" target="_blank"><i class="fab fa-threads"></i></a>
+                    </div>
+                </div>
+                <div class="footer-section footer-section-center">
+                    <p>if you're not asking questions, you're just wearing clothes.</p>
+                </div>
+                <div class="footer-section footer-section-right">
+                    <ul>
+                        <li><a href="index.html#about">ABOUT</a></li>
+                        <li><a href="index.html#portfolio">PORTFOLIO</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2026 silviciouƨ</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="project-script.js"></script>
+</body>
+</html>

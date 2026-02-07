@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Silvicious - Digital Fashion Portfolio</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="container">
+            <div class="nav-wrapper">
+                <div class="logo">
+                    <h1>silviciou<span class="rotating-s">s</span></h1>
+                </div>
+                <ul class="nav-menu">
+                    <li><a href="#about">About</a></li>
+                    <li><a href="#portfolio">Portfolio</a></li>
+                </ul>
+                <div class="hamburger">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section id="home" class="hero">
+        <div class="hero-content">
+            <div class="hero-text">
+                <p class="hero-intro">Hello, I'm</p>
+                <h1 class="hero-title">silviciouƨ</h1>
+                <p class="hero-role">Fashion Futurist & Digital Design Strategist</p>
+                <p class="hero-description">I create speculative fashion narratives and radical design experiences at the intersection of digital culture, sustainability, and emerging technologies.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="about">
+        <div class="container">
+            <h2>About</h2>
+            <div class="about-content">
+                <div class="about-text">
+                    <p>I'm Silvia, a fashion futurist specialising in digital fashion design and speculative thinking.</p>
+                    <p>I am a strategic thinker, a maker, and a change-maker. I take fashion seriously—because if you're not asking questions, you're just wearing clothes.</p>
+                    <p>Through speculative design, sustainable innovation, and radical experimentation, I explore where technology, people, and fashion collide to create new possibilities.</p>
+                </div>
+                <div class="about-image">
+                    <img src="https://via.placeholder.com/400x600?text=Silvia" alt="Silvia - Fashion Futurist">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Portfolio Section -->
+    <section id="portfolio" class="portfolio">
+        <div class="container">
+            <h2>Portfolio</h2>
+            <div class="portfolio-filters">
+                <button class="filter-btn active" data-filter="all">All</button>
+                <button class="filter-btn" data-filter="craftvism">Craftvism</button>
+                <button class="filter-btn" data-filter="digital-fashion">Digital Fashion</button>
+                <button class="filter-btn" data-filter="intervention">Intervention</button>
+                <button class="filter-btn" data-filter="performance">Performance</button>
+                <button class="filter-btn" data-filter="speculative">Speculative Design</button>
+                <button class="filter-btn" data-filter="xr-fashion">XR Fashion</button>
+            </div>
+            <div class="portfolio-grid">
+                <a href="project.html?id=1" class="portfolio-item" data-category="speculative">
+                    <div class="portfolio-image">
+                        <img src="https://via.placeholder.com/400x500?text=Future+Wear" alt="Future Skins">
+                    </div>
+                    <div class="portfolio-info">
+                        <h3>Future Skins</h3>
+                        <p class="portfolio-category">Speculative Design</p>
+                    </div>
+                </a>
+                <a href="project.html?id=2" class="portfolio-item" data-category="digital-fashion">
+                    <div class="portfolio-image">
+                        <img src="https://via.placeholder.com/400x500?text=Circular+Fashion" alt="Circular Narratives">
+                    </div>
+                    <div class="portfolio-info">
+                        <h3>Circular Narratives</h3>
+                        <p class="portfolio-category">Digital Fashion</p>
+                    </div>
+                </a>
+                <a href="project.html?id=3" class="portfolio-item" data-category="xr-fashion">
+                    <div class="portfolio-image">
+                        <img src="https://via.placeholder.com/400x500?text=Digital+Fabric" alt="Glitch Couture">
+                    </div>
+                    <div class="portfolio-info">
+                        <h3>Glitch Couture</h3>
+                        <p class="portfolio-category">XR Fashion</p>
+                    </div>
+                </a>
+                <a href="project.html?id=4" class="portfolio-item" data-category="performance">
+                    <div class="portfolio-image">
+                        <img src="https://via.placeholder.com/400x500?text=Tech+Fashion" alt="Biometric Wear">
+                    </div>
+                    <div class="portfolio-info">
+                        <h3>Biometric Wear</h3>
+                        <p class="portfolio-category">Performance</p>
+                    </div>
+                </a>
+                <a href="project.html?id=5" class="portfolio-item" data-category="intervention">
+                    <div class="portfolio-image">
+                        <img src="https://via.placeholder.com/400x500?text=Upcycled" alt="Waste to Wonder">
+                    </div>
+                    <div class="portfolio-info">
+                        <h3>Waste to Wonder</h3>
+                        <p class="portfolio-category">Intervention</p>
+                    </div>
+                </a>
+                <a href="project.html?id=6" class="portfolio-item" data-category="craftvism">
+                    <div class="portfolio-image">
+                        <img src="https://via.placeholder.com/400x500?text=Radical+Design" alt="Boundary Breaking">
+                    </div>
+                    <div class="portfolio-info">
+                        <h3>Boundary Breaking</h3>
+                        <p class="portfolio-category">Craftvism</p>
+                    </div>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section footer-section-left">
+                    <div class="social-links">
+                        <a href="#" title="LinkedIn" target="_blank"><i class="fab fa-linkedin"></i></a>
+                        <a href="#" title="Instagram" target="_blank"><i class="fab fa-instagram"></i></a>
+                        <a href="#" title="Threads" target="_blank"><i class="fab fa-threads"></i></a>
+                    </div>
+                </div>
+                <div class="footer-section footer-section-center">
+                    <p>if you're not asking questions, you're just wearing clothes.</p>
+                </div>
+                <div class="footer-section footer-section-right">
+                    <ul>
+                        <li><a href="#about">ABOUT</a></li>
+                        <li><a href="#portfolio">PORTFOLIO</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2026 silviciouƨ</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>

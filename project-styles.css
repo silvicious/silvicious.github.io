@@ -1,0 +1,267 @@
+/* ==================== Project Page Styles ==================== */
+
+.back-link {
+    font-weight: 600;
+    letter-spacing: 0.5px;
+    color: var(--text-dark);
+    transition: color 0.3s;
+    font-size: 0.9rem;
+}
+
+.back-link:hover {
+    color: #b500ff;
+}
+
+/* ==================== Project Section ==================== */
+.project-section {
+    padding: 80px 60px;
+    background: white;
+    min-height: 100vh;
+}
+
+.project-content {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 6rem;
+    align-items: flex-start;
+}
+
+/* ==================== Slider ==================== */
+.slider-container {
+    position: relative;
+    width: 100%;
+}
+
+.slider-wrapper {
+    position: relative;
+    width: 100%;
+    aspect-ratio: 4/3;
+    overflow: hidden;
+    border: 1px solid #e0e0e0;
+    background: #f5f5f5;
+}
+
+.slides {
+    position: relative;
+    width: 100%;
+    height: 100%;
+}
+
+.slide {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    opacity: 0;
+    transition: opacity 0.6s ease-in-out;
+}
+
+.slide.active {
+    opacity: 1;
+}
+
+.slide img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.slider-nav {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background: rgba(0, 0, 0, 0.5);
+    color: white;
+    border: none;
+    width: 50px;
+    height: 50px;
+    border-radius: 0;
+    cursor: pointer;
+    transition: all 0.3s;
+    z-index: 10;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.2rem;
+}
+
+.slider-nav:hover {
+    background: rgba(0, 0, 0, 0.8);
+}
+
+.slider-nav.prev {
+    left: 0;
+}
+
+.slider-nav.next {
+    right: 0;
+}
+
+.slider-indicators {
+    position: absolute;
+    bottom: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    gap: 10px;
+    z-index: 10;
+}
+
+.indicator {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.5);
+    cursor: pointer;
+    transition: all 0.3s;
+    border: 1px solid rgba(255, 255, 255, 0.7);
+}
+
+.indicator.active {
+    background: white;
+    width: 30px;
+    border-radius: 5px;
+}
+
+/* ==================== Project Info ==================== */
+.project-info {
+    display: flex;
+    flex-direction: column;
+}
+
+.project-info h1 {
+    font-size: 2.5rem;
+    margin-bottom: 0.8rem;
+    font-weight: 400;
+    letter-spacing: -0.5px;
+    line-height: 1.2;
+}
+
+.project-category {
+    font-size: 0.9rem;
+    text-transform: capitalize;
+    letter-spacing: 1px;
+    color: #b500ff;
+    font-weight: 600;
+    margin-bottom: 2rem;
+    text-transform: uppercase;
+}
+
+.project-description {
+    font-size: 1.05rem;
+    line-height: 1.8;
+    color: #333;
+    margin-bottom: 3rem;
+    font-weight: 300;
+}
+
+.project-description p {
+    margin-bottom: 1.5rem;
+}
+
+.project-details {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 3rem;
+}
+
+.detail-group {
+    margin-bottom: 2.5rem;
+}
+
+.detail-group h3 {
+    font-size: 1rem;
+    font-weight: 600;
+    letter-spacing: 0.5px;
+    margin-bottom: 1rem;
+    text-transform: uppercase;
+    color: var(--text-dark);
+}
+
+.detail-group p {
+    font-size: 0.95rem;
+    color: #666;
+    line-height: 1.7;
+    font-weight: 300;
+}
+
+.back-button {
+    display: inline-block;
+    font-weight: 600;
+    letter-spacing: 0.5px;
+    color: var(--text-dark);
+    transition: all 0.3s;
+    font-size: 0.9rem;
+    padding: 0;
+    border: none;
+    background: none;
+    cursor: pointer;
+}
+
+.back-button:hover {
+    color: #b500ff;
+}
+
+/* ==================== Responsive ==================== */
+@media (max-width: 1024px) {
+    .project-content {
+        grid-template-columns: 1fr;
+        gap: 3rem;
+    }
+
+    .project-info h1 {
+        font-size: 2rem;
+    }
+
+    .slider-container {
+        order: 2;
+    }
+
+    .project-info {
+        order: 1;
+    }
+}
+
+@media (max-width: 768px) {
+    .project-section {
+        padding: 60px 30px;
+    }
+
+    .project-info h1 {
+        font-size: 1.6rem;
+    }
+
+    .slider-wrapper {
+        aspect-ratio: 16/9;
+    }
+
+    .slider-nav {
+        width: 40px;
+        height: 40px;
+        font-size: 1rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .project-section {
+        padding: 40px 20px;
+    }
+
+    .project-info h1 {
+        font-size: 1.3rem;
+    }
+
+    .slider-wrapper {
+        aspect-ratio: 16/9;
+    }
+
+    .detail-group {
+        margin-bottom: 1.5rem;
+    }
+
+    .project-description {
+        font-size: 0.95rem;
+        margin-bottom: 2rem;
+    }
+}

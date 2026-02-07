@@ -1,0 +1,125 @@
+{
+  "site": {
+    "title": "silviciouƨ - Fashion Futurist",
+    "description": "Speculative Design • Digital Fashion • Radical Thinking",
+    "author": "Silvia",
+    "year": 2026
+  },
+  "hero": {
+    "title": "silviciouƨ",
+    "subtitle": "Fashion Futurist",
+    "tagline": "Speculative Design • Digital Fashion • Radical Thinking",
+    "ctaText": "Explore Projects"
+  },
+  "about": {
+    "title": "About",
+    "intro": "Hello! 👽 I am silviciouƨ.",
+    "name": "I'm Silvia, a fashion futurist specialising in digital fashion.",
+    "tagline": "I am a strategic thinker, a maker, and a game-changer.",
+    "description": "I love playing with technology, exploring quirky trends, and venturing into uncharted territories where design, people, and tech collide.",
+    "focus": "I take fashion seriouƨly. Because if you're not asking questions, you're just wearing clothes.",
+    "themes": [
+      {
+        "title": "Speculative Design",
+        "description": "Imagining possible futures through fashion"
+      },
+      {
+        "title": "Sustainability",
+        "description": "Digital solutions for a better tomorrow"
+      },
+      {
+        "title": "Radical Thinking",
+        "description": "Challenging conventions, breaking boundaries"
+      }
+    ]
+  },
+  "portfolio": {
+    "title": "Projects",
+    "items": [
+      {
+        "id": 1,
+        "title": "Future Skins",
+        "category": "speculative",
+        "image": "https://via.placeholder.com/400x500?text=Future+Wear",
+        "description": "Speculative Design"
+      },
+      {
+        "id": 2,
+        "title": "Circular Narratives",
+        "category": "sustainable",
+        "image": "https://via.placeholder.com/400x500?text=Circular+Fashion",
+        "description": "Sustainable Design"
+      },
+      {
+        "id": 3,
+        "title": "Glitch Couture",
+        "category": "experimental",
+        "image": "https://via.placeholder.com/400x500?text=Digital+Fabric",
+        "description": "Experimental Project"
+      },
+      {
+        "id": 4,
+        "title": "Biometric Wear",
+        "category": "speculative",
+        "image": "https://via.placeholder.com/400x500?text=Tech+Fashion",
+        "description": "Speculative Design"
+      },
+      {
+        "id": 5,
+        "title": "Waste to Wonder",
+        "category": "sustainable",
+        "image": "https://via.placeholder.com/400x500?text=Upcycled",
+        "description": "Sustainable Innovation"
+      },
+      {
+        "id": 6,
+        "title": "Boundary Breaking",
+        "category": "experimental",
+        "image": "https://via.placeholder.com/400x500?text=Radical+Design",
+        "description": "Experimental Design"
+      }
+    ]
+  },
+  "research": [
+    {
+      "icon": "fa-infinity",
+      "title": "Digital Fashion Systems",
+      "description": "Exploring virtual clothing, avatar fashion, and the intersection of digital and physical identity."
+    },
+    {
+      "icon": "fa-leaf",
+      "title": "Sustainable Innovation",
+      "description": "Investigating digital solutions to fashion's sustainability challenges and circular design futures."
+    },
+    {
+      "icon": "fa-dna",
+      "title": "Bio-Fashion Futures",
+      "description": "Speculating on bio-engineered textiles, living materials, and post-human fashion possibilities."
+    },
+    {
+      "icon": "fa-brain",
+      "title": "Cognitive Design",
+      "description": "Creating fashion experiences that challenge perception, provoke thought, and inspire new perspectives."
+    },
+    {
+      "icon": "fa-network-wired",
+      "title": "Tech-Fashion Collisions",
+      "description": "Merging wearable technology, AI, and fashion design to explore radical human-machine relationships."
+    },
+    {
+      "icon": "fa-map-pin",
+      "title": "Speculative Futures",
+      "description": "Designing for alternative realities and imagining fashion in worlds yet to be built."
+    }
+  ],
+  "social": {
+    "instagram": "#",
+    "twitter": "#",
+    "linkedin": "#",
+    "behance": "#"
+  },
+  "contact": {
+    "title": "Let's Create",
+    "subtitle": "Interested in collaborations, conversations, or exploring radical design ideas together?"
+  }
+}
