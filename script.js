@@ -127,18 +127,47 @@ document.addEventListener('DOMContentLoaded', () => {
         function prevSlide() { currentIndex = (currentIndex - 1 + slides.length) % slides.length; updateCarouselPosition(); }
         function nextSlide() { currentIndex = (currentIndex + 1) % slides.length; updateCarouselPosition(); }
 
-        // Attach click handlers
-        portfolioItems.forEach((item, i) => {
-            const infoBtn = item.querySelector('.project-info');
+        const setPopupDescription = (text) => {
+            if (!popupDescription) return;
+            popupDescription.innerHTML = '';
+            const parts = String(text || '').split('||').map(part => part.trim()).filter(Boolean);
+            if (!parts.length) return;
+            parts.forEach(part => {
+                const p = document.createElement('p');
+                p.textContent = part;
+                popupDescription.appendChild(p);
+            });
+        };
 
-            if (infoBtn) {
-                infoBtn.addEventListener('click', (e) => {
-                    e.stopPropagation();
-                    popupTitle.textContent = item.dataset.title || '';
-                    popupDescription.textContent = item.dataset.description || '';
-                    projectPopup.style.display = 'block';
-                });
-            }
+        let activePopupIndex = null;
+
+        const positionPopupForItem = (item) => {
+            const rect = item.getBoundingClientRect();
+            const top = window.scrollY + rect.top + (rect.height / 2);
+            projectPopup.style.top = `${top}px`;
+        };
+
+        // Attach click handlers
+        portfolioItems.forEach((item, index) => {
+            const infoBtn = item.querySelector('.project-info');
+            const clickSurface = item.querySelector('.slide-click-surface');
+            if (!infoBtn || !clickSurface) return;
+
+            infoBtn.addEventListener('click', (e) => {
+                e.stopPropagation();
+                popupTitle.textContent = item.dataset.title || '';
+                setPopupDescription(item.dataset.description || '');
+                positionPopupForItem(item);
+                projectPopup.style.display = 'block';
+                activePopupIndex = index;
+                infoBtn.classList.add('is-hidden');
+                clickSurface.classList.remove('is-active');
+            });
+
+            clickSurface.addEventListener('click', () => {
+                infoBtn.classList.remove('is-hidden');
+                clickSurface.classList.remove('is-active');
+            });
         });
 
         // Controls
@@ -147,7 +176,17 @@ document.addEventListener('DOMContentLoaded', () => {
         carouselNext.addEventListener('click', nextSlide);
 
         // Popup close
-        closePopup.addEventListener('click', () => projectPopup.style.display = 'none');
+        closePopup.addEventListener('click', () => {
+            projectPopup.style.display = 'none';
+            if (activePopupIndex !== null) {
+                const item = portfolioItems[activePopupIndex];
+                if (item) {
+                    const clickSurface = item.querySelector('.slide-click-surface');
+                    if (clickSurface) clickSurface.classList.add('is-active');
+                }
+            }
+            activePopupIndex = null;
+        });
 
         // Keyboard navigation
         document.addEventListener('keydown', (e) => {
@@ -172,6 +211,13 @@ document.addEventListener('DOMContentLoaded', () => {
         const message = { method };
         if (typeof value !== 'undefined') message.value = value;
         iframe.contentWindow.postMessage(message, '*');
+    };
+
+    // Ensure videos stay muted until users click the volume toggle
+    const muteAllVimeo = () => {
+        document.querySelectorAll('.vimeo-embed, .hover-vimeo, .mosaic-vimeo, .split-vimeo').forEach((iframe) => {
+            postToVimeo(iframe, 'setVolume', 0);
+        });
     };
 
     const pauseAllVimeo = () => {
@@ -246,8 +292,8 @@ document.addEventListener('DOMContentLoaded', () => {
         btn.addEventListener('click', (e) => {
             e.stopPropagation();
             const slide = btn.closest('.project-slide');
-            if (!slide) return;
-            const iframe = slide.querySelector('.vimeo-embed');
+            const container = btn.parentElement;
+            const iframe = (container && container.querySelector('iframe')) || (slide && slide.querySelector('iframe'));
             if (!iframe) return;
             const icon = btn.querySelector('i');
 
@@ -289,13 +335,8 @@ document.addEventListener('DOMContentLoaded', () => {
 
     window.addEventListener('load', () => {
         playVisibleVimeo();
+        muteAllVimeo();
     });
 
-    // Navbar shadow on scroll
-    window.addEventListener('scroll', () => {
-        if (navbar) {
-            if (window.scrollY > 0) navbar.style.boxShadow = '0 2px 20px rgba(0, 0, 0, 0.15)';
-            else navbar.style.boxShadow = '0 2px 10px rgba(0, 0, 0, 0.1)';
-        }
-    });
+    // Keep navbar transparent on scroll
 });

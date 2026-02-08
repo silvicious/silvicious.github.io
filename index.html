@@ -25,8 +25,7 @@
             <div class="hero-text">
                 <p class="hero-intro">Hello, I'm</p>
                 <h1 class="hero-title">silviciouƨ</h1>
-                <p class="hero-role">Fashion Futurist & Digital Design Strategist</p>
-                <p class="hero-description">I create speculative fashion narratives and radical design experiences at the intersection of digital culture, sustainability, and emerging technologies.</p>
+                <p class="hero-description">I spiral on speculative fashion narratives.</p>
             </div>
         </div>
     </section>
@@ -34,9 +33,7 @@
     <!-- Portfolio Section (moved above About) -->
     <section id="portfolio" class="portfolio">
         <div class="container">
-            <div class="portfolio-intro">
-                <h2>Portfolio</h2>
-            </div>
+            <h2 class="section-title section-title-portfolio">Portfolio</h2>
             <div class="portfolio-grid">
                 <div class="portfolio-item" data-index="0" data-title="uvw" data-description="What if fashion existed as an evolving interplay between light and matter, where physical and digital realities overlap?" data-category="speculative">
                     <div class="portfolio-image">
@@ -153,6 +150,7 @@
                             <button class="project-nav project-prev" aria-label="Previous slide">&lt;</button>
                             <button class="project-nav project-next" aria-label="Next slide">&gt;</button>
                         </div>
+                        <button class="slide-click-surface" aria-label="Show project info"></button>
                         <button class="project-info">?</button>
                     </div>
                     <div class="portfolio-info">
@@ -160,7 +158,7 @@
                         <p class="portfolio-category">Speculative Design</p>
                     </div>
                 </div>
-                <div class="portfolio-item" data-index="1" data-title="Circular Narratives" data-description="Digital fashion experiment focused on circularity." data-category="digital-fashion">
+                <div class="portfolio-item" data-index="1" data-title="SpooktaculAR" data-description="What if the real horror of your Halloween costume wasn’t the oil-based plastics, the one-time wear, or the landfill afterlife?||If you also love dressing up, fear not. You can wear these terrifying AR costumes." data-category="digital-fashion">
                     <div class="portfolio-image">
                         <div class="project-slider">
                             <div class="project-track">
@@ -222,6 +220,7 @@
                             <button class="project-nav project-prev" aria-label="Previous slide">&lt;</button>
                             <button class="project-nav project-next" aria-label="Next slide">&gt;</button>
                         </div>
+                        <button class="slide-click-surface" aria-label="Show project info"></button>
                         <button class="project-info">?</button>
                     </div>
                     <div class="portfolio-info">
@@ -229,7 +228,7 @@
                         <p class="portfolio-category">Digital Fashion</p>
                     </div>
                 </div>
-                <div class="portfolio-item" data-index="2" data-title="Glitch Couture" data-description="XR fashion and glitch aesthetics." data-category="xr-fashion">
+                <div class="portfolio-item" data-index="2" data-title="voronoi" data-description="What if we co-design with the computer, inviting _coincidence_ into the creative process, only to realise that randomness is a pattern still beyond our perception?" data-category="xr-fashion">
                     <div class="portfolio-image">
                         <div class="project-slider">
                             <div class="project-track">
@@ -245,12 +244,125 @@
                                         <i class="fa-solid fa-volume-xmark" aria-hidden="true"></i>
                                     </button>
                                 </div>
-                                <div class="project-slide"><img src="https://via.placeholder.com/1600x900?text=Digital+Fabric+02" alt="Glitch Couture slide 2"></div>
-                                <div class="project-slide"><img src="https://via.placeholder.com/1600x900?text=Digital+Fabric+03" alt="Glitch Couture slide 3"></div>
+                                <div class="project-slide">
+                                    <div class="split-grid">
+                                        <div class="split-item">
+                                            <img src="images/portfolio-item-3-voronoi/01_voronoi_model.jpg" alt="Voronoi model 01">
+                                        </div>
+                                        <div class="split-item">
+                                            <iframe
+                                                class="split-vimeo"
+                                                src="https://player.vimeo.com/video/1163054559?background=1&autoplay=1&loop=1&muted=1&autopause=0"
+                                                title="Voronoi video 01"
+                                                allow="autoplay; fullscreen; picture-in-picture"
+                                                allowfullscreen
+                                            ></iframe>
+                                                <button class="video-audio" data-muted="1" aria-label="Sound off">
+                                                    <i class="fa-solid fa-volume-xmark" aria-hidden="true"></i>
+                                                </button>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="project-slide">
+                                    <div class="split-grid">
+                                        <div class="split-item">
+                                            <img src="images/portfolio-item-3-voronoi/02_voronoi_model.jpg" alt="Voronoi model 02">
+                                        </div>
+                                        <div class="split-item">
+                                            <iframe
+                                                class="split-vimeo"
+                                                src="https://player.vimeo.com/video/1163054581?background=1&autoplay=1&loop=1&muted=1&autopause=0"
+                                                title="Voronoi video 02"
+                                                allow="autoplay; fullscreen; picture-in-picture"
+                                                allowfullscreen
+                                            ></iframe>
+                                                <button class="video-audio" data-muted="1" aria-label="Sound off">
+                                                    <i class="fa-solid fa-volume-xmark" aria-hidden="true"></i>
+                                                </button>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="project-slide">
+                                    <div class="split-grid">
+                                        <div class="split-item">
+                                            <img src="images/portfolio-item-3-voronoi/03_voronoi_model.jpg" alt="Voronoi model 03">
+                                        </div>
+                                        <div class="split-item">
+                                            <iframe
+                                                class="split-vimeo"
+                                                src="https://player.vimeo.com/video/1163054594?background=1&autoplay=1&loop=1&muted=1&autopause=0"
+                                                title="Voronoi video 03"
+                                                allow="autoplay; fullscreen; picture-in-picture"
+                                                allowfullscreen
+                                            ></iframe>
+                                                <button class="video-audio" data-muted="1" aria-label="Sound off">
+                                                    <i class="fa-solid fa-volume-xmark" aria-hidden="true"></i>
+                                                </button>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="project-slide">
+                                    <div class="split-grid">
+                                        <div class="split-item">
+                                            <img src="images/portfolio-item-3-voronoi/04_voronoi_model.jpg" alt="Voronoi model 04">
+                                        </div>
+                                        <div class="split-item">
+                                            <iframe
+                                                class="split-vimeo"
+                                                src="https://player.vimeo.com/video/1163054606?background=1&autoplay=1&loop=1&muted=1&autopause=0"
+                                                title="Voronoi video 04"
+                                                allow="autoplay; fullscreen; picture-in-picture"
+                                                allowfullscreen
+                                            ></iframe>
+                                                <button class="video-audio" data-muted="1" aria-label="Sound off">
+                                                    <i class="fa-solid fa-volume-xmark" aria-hidden="true"></i>
+                                                </button>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="project-slide">
+                                    <div class="split-grid">
+                                        <div class="split-item">
+                                            <img src="images/portfolio-item-3-voronoi/05_voronoi_model.jpg" alt="Voronoi model 05">
+                                        </div>
+                                        <div class="split-item">
+                                            <iframe
+                                                class="split-vimeo"
+                                                src="https://player.vimeo.com/video/1163054641?background=1&autoplay=1&loop=1&muted=1&autopause=0"
+                                                title="Voronoi video 05"
+                                                allow="autoplay; fullscreen; picture-in-picture"
+                                                allowfullscreen
+                                            ></iframe>
+                                                <button class="video-audio" data-muted="1" aria-label="Sound off">
+                                                    <i class="fa-solid fa-volume-xmark" aria-hidden="true"></i>
+                                                </button>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="project-slide">
+                                    <div class="split-grid">
+                                        <div class="split-item">
+                                            <img src="images/portfolio-item-3-voronoi/06_voronoi_model.jpg" alt="Voronoi model 06">
+                                        </div>
+                                        <div class="split-item">
+                                            <iframe
+                                                class="split-vimeo"
+                                                src="https://player.vimeo.com/video/1163054625?background=1&autoplay=1&loop=1&muted=1&autopause=0"
+                                                title="Voronoi video 06"
+                                                allow="autoplay; fullscreen; picture-in-picture"
+                                                allowfullscreen
+                                            ></iframe>
+                                                <button class="video-audio" data-muted="1" aria-label="Sound off">
+                                                    <i class="fa-solid fa-volume-xmark" aria-hidden="true"></i>
+                                                </button>
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
                             <button class="project-nav project-prev" aria-label="Previous slide">&lt;</button>
                             <button class="project-nav project-next" aria-label="Next slide">&gt;</button>
                         </div>
+                        <button class="slide-click-surface" aria-label="Show project info"></button>
                         <button class="project-info">?</button>
                     </div>
                     <div class="portfolio-info">
@@ -258,17 +370,25 @@
                         <p class="portfolio-category">XR Fashion</p>
                     </div>
                 </div>
-                <div class="portfolio-item" data-index="3" data-title="Biometric Wear" data-description="Performance-led wearable with biometric interfaces." data-category="performance">
+                <div class="portfolio-item" data-index="3" data-title="End Block" data-description="What if blockchain enabled a personal footprint score that tracked the garments we leave behind?||Would a limited disposal allowance shift us toward repair, exchange, and a higher sense of ownership?" data-category="performance">
                     <div class="portfolio-image">
                         <div class="project-slider">
                             <div class="project-track">
-                                <div class="project-slide"><img src="https://via.placeholder.com/1600x900?text=Tech+Fashion+01" alt="Biometric Wear slide 1"></div>
-                                <div class="project-slide"><img src="https://via.placeholder.com/1600x900?text=Tech+Fashion+02" alt="Biometric Wear slide 2"></div>
-                                <div class="project-slide"><img src="https://via.placeholder.com/1600x900?text=Tech+Fashion+03" alt="Biometric Wear slide 3"></div>
+                                <div class="project-slide">
+                                    <iframe
+                                        class="vimeo-embed"
+                                        src="https://player.vimeo.com/video/554008381?background=1&autoplay=1&loop=1&muted=1&title=0&byline=0&portrait=0&api=1&player_id=vimeo-4"
+                                        title="End Block video"
+                                        allow="autoplay; fullscreen; picture-in-picture"
+                                        allowfullscreen
+                                    ></iframe>
+                                    <button class="video-audio" data-muted="1" aria-label="Sound off">
+                                        <i class="fa-solid fa-volume-xmark" aria-hidden="true"></i>
+                                    </button>
+                                </div>
                             </div>
-                            <button class="project-nav project-prev" aria-label="Previous slide">&lt;</button>
-                            <button class="project-nav project-next" aria-label="Next slide">&gt;</button>
                         </div>
+                        <button class="slide-click-surface" aria-label="Show project info"></button>
                         <button class="project-info">?</button>
                     </div>
                     <div class="portfolio-info">
@@ -276,17 +396,25 @@
                         <p class="portfolio-category">Performance</p>
                     </div>
                 </div>
-                <div class="portfolio-item" data-index="4" data-title="Waste to Wonder" data-description="Intervention project upcycling waste into garments." data-category="intervention">
+                <div class="portfolio-item" data-index="4" data-title="Boredom-proof Checkout" data-description="What if paying wasn’t effortless?||Could a playful pause in the checkout flow interrupt impulse buying and reveal whether a purchase is driven by desire or boredom?" data-category="intervention">
                     <div class="portfolio-image">
                         <div class="project-slider">
                             <div class="project-track">
-                                <div class="project-slide"><img src="https://via.placeholder.com/1600x900?text=Upcycled+01" alt="Waste to Wonder slide 1"></div>
-                                <div class="project-slide"><img src="https://via.placeholder.com/1600x900?text=Upcycled+02" alt="Waste to Wonder slide 2"></div>
-                                <div class="project-slide"><img src="https://via.placeholder.com/1600x900?text=Upcycled+03" alt="Waste to Wonder slide 3"></div>
+                                <div class="project-slide">
+                                    <iframe
+                                        class="vimeo-embed"
+                                        src="https://player.vimeo.com/video/477510723?background=1&autoplay=1&loop=1&muted=1&title=0&byline=0&portrait=0&api=1&player_id=vimeo-5"
+                                        title="Boredom-proof Checkout video"
+                                        allow="autoplay; fullscreen; picture-in-picture"
+                                        allowfullscreen
+                                    ></iframe>
+                                    <button class="video-audio" data-muted="1" aria-label="Sound off">
+                                        <i class="fa-solid fa-volume-xmark" aria-hidden="true"></i>
+                                    </button>
+                                </div>
                             </div>
-                            <button class="project-nav project-prev" aria-label="Previous slide">&lt;</button>
-                            <button class="project-nav project-next" aria-label="Next slide">&gt;</button>
                         </div>
+                        <button class="slide-click-surface" aria-label="Show project info"></button>
                         <button class="project-info">?</button>
                     </div>
                     <div class="portfolio-info">
@@ -294,21 +422,55 @@
                         <p class="portfolio-category">Intervention</p>
                     </div>
                 </div>
-                <div class="portfolio-item" data-index="5" data-title="Boundary Breaking" data-description="Craftvism project exploring community textile practices." data-category="craftvism">
+                <div class="portfolio-item" data-index="5" data-title="Wear Off" data-description="What if clothes only existed as long as we remembered them?||When you picture your wardrobe, which clothes can you recall?" data-category="craftvism">
                     <div class="portfolio-image">
                         <div class="project-slider">
                             <div class="project-track">
-                                <div class="project-slide"><img src="https://via.placeholder.com/1600x900?text=Radical+Design+01" alt="Boundary Breaking slide 1"></div>
-                                <div class="project-slide"><img src="https://via.placeholder.com/1600x900?text=Radical+Design+02" alt="Boundary Breaking slide 2"></div>
-                                <div class="project-slide"><img src="https://via.placeholder.com/1600x900?text=Radical+Design+03" alt="Boundary Breaking slide 3"></div>
+                                <div class="project-slide">
+                                    <iframe
+                                        class="vimeo-embed"
+                                        src="https://player.vimeo.com/video/507504131?background=1&autoplay=1&loop=1&muted=1&title=0&byline=0&portrait=0&api=1&player_id=vimeo-6"
+                                        title="Wear Off video"
+                                        allow="autoplay; fullscreen; picture-in-picture"
+                                        allowfullscreen
+                                    ></iframe>
+                                    <button class="video-audio" data-muted="1" aria-label="Sound off">
+                                        <i class="fa-solid fa-volume-xmark" aria-hidden="true"></i>
+                                    </button>
+                                </div>
                             </div>
-                            <button class="project-nav project-prev" aria-label="Previous slide">&lt;</button>
-                            <button class="project-nav project-next" aria-label="Next slide">&gt;</button>
                         </div>
+                        <button class="slide-click-surface" aria-label="Show project info"></button>
                         <button class="project-info">?</button>
                     </div>
                     <div class="portfolio-info">
                         <h3>Boundary Breaking</h3>
+                        <p class="portfolio-category">Craftvism</p>
+                    </div>
+                </div>
+                <div class="portfolio-item" data-index="6" data-title="Trick-or-Treat" data-description="What if stress, indecision, and regret were built-in features rather than shopping side effects?||What if learning the rules of the game was the only way to trigger behavioural change?" data-category="craftvism">
+                    <div class="portfolio-image">
+                        <div class="project-slider">
+                            <div class="project-track">
+                                <div class="project-slide">
+                                    <iframe
+                                        class="vimeo-embed"
+                                        src="https://player.vimeo.com/video/432596505?background=1&autoplay=1&loop=1&muted=1&title=0&byline=0&portrait=0&api=1&player_id=vimeo-7"
+                                        title="Trick-or-Treat video"
+                                        allow="autoplay; fullscreen; picture-in-picture"
+                                        allowfullscreen
+                                    ></iframe>
+                                    <button class="video-audio" data-muted="1" aria-label="Sound off">
+                                        <i class="fa-solid fa-volume-xmark" aria-hidden="true"></i>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                        <button class="slide-click-surface" aria-label="Show project info"></button>
+                        <button class="project-info">?</button>
+                    </div>
+                    <div class="portfolio-info">
+                        <h3>Trick-or-Treat</h3>
                         <p class="portfolio-category">Craftvism</p>
                     </div>
                 </div>
@@ -319,12 +481,11 @@
     <!-- About Section (moved below Portfolio) -->
     <section id="about" class="about">
         <div class="container">
-            <h2>About</h2>
+            <h2 class="section-title section-title-about">About</h2>
             <div class="about-content">
                 <div class="about-text">
-                    <p>I'm Silvia, a fashion futurist specialising in digital fashion design and speculative thinking.</p>
-                    <p>I am a strategic thinker, a maker, and a change-maker. I take fashion seriously—because if you're not asking questions, you're just wearing clothes.</p>
-                    <p>Through speculative design, sustainable innovation, and radical experimentation, I explore where technology, people, and fashion collide to create new possibilities.</p>
+                    <p>I'm Silvia, I am a Fashion Futurist & Creative Strategist.</p>
+                    <p>I love playing with technology, exploring quirky trends, and venturing into uncharted territories where radical design, people, and tech collide.</p>
                 </div>
                 <div class="about-image">
                     <img src="images/about-image.png" alt="Silvia - Fashion Futurist">
@@ -370,7 +531,7 @@
     <div class="project-popup" id="projectPopup">
         <button class="close-popup" id="closePopup">×</button>
         <h3 id="popupTitle"></h3>
-        <p id="popupDescription"></p>
+        <div id="popupDescription"></div>
     </div>
 
     <script src="script.js"></script>
