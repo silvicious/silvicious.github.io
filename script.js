@@ -1,4 +1,4 @@
-// ==================== Navigation Toggle ==================== 
+// ==================== Navigation Toggle and Portfolio Carousel ====================
 document.addEventListener('DOMContentLoaded', () => {
     const hamburger = document.querySelector('.hamburger');
     const navMenu = document.querySelector('.nav-menu');
@@ -6,7 +6,6 @@ document.addEventListener('DOMContentLoaded', () => {
     const navbar = document.querySelector('.navbar');
 
     // Scroll behavior for navbar
-    let lastScrollTop = 0;
     window.addEventListener('scroll', () => {
         let scrollTop = window.pageYOffset || document.documentElement.scrollTop;
         if (scrollTop > 100) {
@@ -14,80 +13,13 @@ document.addEventListener('DOMContentLoaded', () => {
         } else {
             navbar.classList.remove('scrolled');
         }
-        lastScrollTop = scrollTop;
     });
 
-    // Toggle mobile menu
+    // Mobile menu toggle (if present)
     if (hamburger) {
         hamburger.addEventListener('click', () => {
-            navMenu.classList.toggle('active');
+            if (navMenu) navMenu.classList.toggle('active');
             hamburger.classList.toggle('active');
-        });
-    }
-
-    // Close menu when a link is clicked
-    navLinks.forEach(link => {
-        link.addEventListener('click', () => {
-            if (navMenu && navMenu.classList.contains('active')) {
-                navMenu.classList.remove('active');
-                hamburger.classList.remove('active');
-            }
-        });
-    });
-
-    // Portfolio filter functionality
-    const filterBtns = document.querySelectorAll('.filter-btn');
-    const portfolioItems = document.querySelectorAll('.portfolio-item');
-
-    filterBtns.forEach(btn => {
-        btn.addEventListener('click', () => {
-            // Remove active class from all buttons
-            filterBtns.forEach(b => b.classList.remove('active'));
-            // Add active class to clicked button
-            btn.classList.add('active');
-
-            const filterValue = btn.getAttribute('data-filter');
-
-            // Filter portfolio items
-            portfolioItems.forEach(item => {
-                if (filterValue === 'all') {
-                    item.style.display = 'block';
-                    setTimeout(() => {
-                        item.style.opacity = '1';
-                    }, 10);
-                } else {
-                    const category = item.getAttribute('data-category');
-                    if (category === filterValue) {
-                        item.style.display = 'block';
-                        setTimeout(() => {
-                            item.style.opacity = '1';
-                        }, 10);
-                    } else {
-                        item.style.opacity = '0';
-                        setTimeout(() => {
-                            item.style.display = 'none';
-                        }, 300);
-                    }
-                }
-            });
-        });
-    });
-
-    // Contact form submission
-    const contactForm = document.querySelector('.contact-form');
-    if (contactForm) {
-        contactForm.addEventListener('submit', (e) => {
-            e.preventDefault();
-            
-            const formData = new FormData(contactForm);
-            const data = Object.fromEntries(formData);
-            
-            // Here you would typically send the form data to a server
-            console.log('Form Data:', data);
-            
-            // Show success message
-            alert('Thank you for reaching out! I\'ll be in touch soon.');
-            contactForm.reset();
         });
     }
 
@@ -98,20 +30,13 @@ document.addEventListener('DOMContentLoaded', () => {
             if (href !== '#' && document.querySelector(href)) {
                 e.preventDefault();
                 const target = document.querySelector(href);
-                target.scrollIntoView({
-                    behavior: 'smooth',
-                    block: 'start'
-                });
+                target.scrollIntoView({ behavior: 'smooth', block: 'start' });
             }
         });
     });
 
-    // Intersection Observer for animations on scroll
-    const observerOptions = {
-        threshold: 0.1,
-        rootMargin: '0px 0px -100px 0px'
-    };
-
+    // Intersection observer for subtle entrance animations
+    const observerOptions = { threshold: 0.1, rootMargin: '0px 0px -100px 0px' };
     const observer = new IntersectionObserver((entries) => {
         entries.forEach(entry => {
             if (entry.isIntersecting) {
@@ -121,7 +46,6 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }, observerOptions);
 
-    // Observe research cards, portfolio items, and theme cards
     document.querySelectorAll('.research-card, .portfolio-item, .theme-card').forEach(el => {
         el.style.opacity = '0';
         el.style.transform = 'translateY(20px)';
@@ -129,34 +53,249 @@ document.addEventListener('DOMContentLoaded', () => {
         observer.observe(el);
     });
 
-    // Navbar shadow on scroll
-    window.addEventListener('scroll', () => {
-        const navbar = document.querySelector('.navbar');
-        if (window.scrollY > 0) {
-            navbar.style.boxShadow = '0 2px 20px rgba(0, 0, 0, 0.15)';
-        } else {
-            navbar.style.boxShadow = '0 2px 10px rgba(0, 0, 0, 0.1)';
-        }
-    });
-
     // Cursor effect
     const cursorDot = document.createElement('div');
     cursorDot.className = 'cursor-dot';
     document.body.appendChild(cursorDot);
-
     document.addEventListener('mousemove', (e) => {
         cursorDot.style.left = (e.clientX - 3) + 'px';
         cursorDot.style.top = (e.clientY - 3) + 'px';
     });
-
-    // Add glow effect to interactive elements
     const interactiveElements = document.querySelectorAll('a, button, input, textarea');
     interactiveElements.forEach(el => {
-        el.addEventListener('mouseenter', () => {
-            cursorDot.classList.add('glow');
+        el.addEventListener('mouseenter', () => cursorDot.classList.add('glow'));
+        el.addEventListener('mouseleave', () => cursorDot.classList.remove('glow'));
+    });
+
+    // ---------------- Carousel & Popup ----------------
+    const portfolioItems = Array.from(document.querySelectorAll('.portfolio-item'));
+    const carouselModal = document.getElementById('carouselModal');
+    const carouselInner = document.getElementById('carouselInner');
+    const carouselClose = document.getElementById('carouselClose');
+    const carouselPrev = document.getElementById('carouselPrev');
+    const carouselNext = document.getElementById('carouselNext');
+    const projectPopup = document.getElementById('projectPopup');
+    const popupTitle = document.getElementById('popupTitle');
+    const popupDescription = document.getElementById('popupDescription');
+    const closePopup = document.getElementById('closePopup');
+
+    if (portfolioItems.length && carouselModal && carouselInner) {
+        const slides = portfolioItems.map(item => {
+            const img = item.querySelector('img');
+            return {
+                src: img ? img.src : '',
+                title: item.dataset.title || '',
+                description: item.dataset.description || ''
+            };
         });
-        el.addEventListener('mouseleave', () => {
-            cursorDot.classList.remove('glow');
+
+        // Render slides
+        function renderSlides() {
+            carouselInner.innerHTML = '';
+            slides.forEach(s => {
+                const slide = document.createElement('div');
+                slide.className = 'carousel-slide';
+                const image = document.createElement('img');
+                image.src = s.src;
+                image.alt = s.title || '';
+                slide.appendChild(image);
+                carouselInner.appendChild(slide);
+            });
+        }
+
+        let currentIndex = 0;
+
+        function openCarousel(index) {
+            currentIndex = index || 0;
+            renderSlides();
+            carouselModal.style.display = 'flex';
+            updateCarouselPosition();
+            carouselModal.setAttribute('aria-hidden', 'false');
+        }
+
+        function closeCarousel() {
+            carouselModal.style.display = 'none';
+            carouselModal.setAttribute('aria-hidden', 'true');
+            projectPopup.style.display = 'none';
+        }
+
+        function updateCarouselPosition() {
+            const offset = -currentIndex * 100;
+            carouselInner.style.transform = `translateX(${offset}%)`;
+        }
+
+        function prevSlide() { currentIndex = (currentIndex - 1 + slides.length) % slides.length; updateCarouselPosition(); }
+        function nextSlide() { currentIndex = (currentIndex + 1) % slides.length; updateCarouselPosition(); }
+
+        // Attach click handlers
+        portfolioItems.forEach((item, i) => {
+            const infoBtn = item.querySelector('.project-info');
+
+            if (infoBtn) {
+                infoBtn.addEventListener('click', (e) => {
+                    e.stopPropagation();
+                    popupTitle.textContent = item.dataset.title || '';
+                    popupDescription.textContent = item.dataset.description || '';
+                    projectPopup.style.display = 'block';
+                });
+            }
         });
+
+        // Controls
+        carouselClose.addEventListener('click', closeCarousel);
+        carouselPrev.addEventListener('click', prevSlide);
+        carouselNext.addEventListener('click', nextSlide);
+
+        // Popup close
+        closePopup.addEventListener('click', () => projectPopup.style.display = 'none');
+
+        // Keyboard navigation
+        document.addEventListener('keydown', (e) => {
+            if (carouselModal.style.display === 'flex') {
+                if (e.key === 'ArrowLeft') prevSlide();
+                if (e.key === 'ArrowRight') nextSlide();
+                if (e.key === 'Escape') closeCarousel();
+            }
+        });
+
+        // Click outside modal to close
+        carouselModal.addEventListener('click', (e) => {
+            if (e.target === carouselModal) closeCarousel();
+        });
+    }
+
+    // Per-item slider controls
+    const sliders = Array.from(document.querySelectorAll('.project-slider'));
+
+    const postToVimeo = (iframe, method, value) => {
+        if (!iframe || !iframe.contentWindow) return;
+        const message = { method };
+        if (typeof value !== 'undefined') message.value = value;
+        iframe.contentWindow.postMessage(message, '*');
+    };
+
+    const pauseAllVimeo = () => {
+        document.querySelectorAll('.vimeo-embed').forEach((iframe) => postToVimeo(iframe, 'pause'));
+    };
+
+    const playVisibleVimeo = () => {
+        const items = Array.from(document.querySelectorAll('.portfolio-item'));
+        if (!items.length) return;
+        const viewportHeight = window.innerHeight || document.documentElement.clientHeight;
+
+        let bestItem = null;
+        let bestVisible = 0;
+
+        items.forEach((item) => {
+            const rect = item.getBoundingClientRect();
+            const visible = Math.max(0, Math.min(rect.bottom, viewportHeight) - Math.max(rect.top, 0));
+            if (visible > bestVisible) {
+                bestVisible = visible;
+                bestItem = item;
+            }
+        });
+
+        pauseAllVimeo();
+
+        if (bestItem) {
+            const slider = bestItem.querySelector('.project-slider');
+            if (!slider) return;
+            const index = Number(slider.dataset.index || 0);
+            const slides = slider.querySelectorAll('.project-slide');
+            const current = slides[index];
+            if (!current) return;
+            const iframe = current.querySelector('.vimeo-embed');
+            if (iframe) postToVimeo(iframe, 'play');
+        }
+    };
+
+    sliders.forEach((slider) => {
+        const track = slider.querySelector('.project-track');
+        const slides = slider.querySelectorAll('.project-slide');
+        const prevBtn = slider.querySelector('.project-prev');
+        const nextBtn = slider.querySelector('.project-next');
+        let index = 0;
+
+        if (!track || slides.length === 0) return;
+
+        const update = () => {
+            slider.dataset.index = String(index);
+            track.style.transform = `translateX(${-index * 100}%)`;
+            playVisibleVimeo();
+        };
+
+        if (prevBtn) {
+            prevBtn.addEventListener('click', (e) => {
+                e.stopPropagation();
+                index = (index - 1 + slides.length) % slides.length;
+                update();
+            });
+        }
+
+        if (nextBtn) {
+            nextBtn.addEventListener('click', (e) => {
+                e.stopPropagation();
+                index = (index + 1) % slides.length;
+                update();
+            });
+        }
+    });
+
+    // Audio controls for Vimeo embeds
+    document.querySelectorAll('.video-audio').forEach((btn) => {
+        btn.addEventListener('click', (e) => {
+            e.stopPropagation();
+            const slide = btn.closest('.project-slide');
+            if (!slide) return;
+            const iframe = slide.querySelector('.vimeo-embed');
+            if (!iframe) return;
+            const icon = btn.querySelector('i');
+
+            const isMuted = btn.dataset.muted === '1';
+            if (isMuted) {
+                postToVimeo(iframe, 'setVolume', 1);
+                btn.dataset.muted = '0';
+                if (icon) {
+                    icon.classList.remove('fa-volume-xmark');
+                    icon.classList.add('fa-volume-high');
+                }
+                btn.setAttribute('aria-label', 'Sound on');
+            } else {
+                postToVimeo(iframe, 'setVolume', 0);
+                btn.dataset.muted = '1';
+                if (icon) {
+                    icon.classList.remove('fa-volume-high');
+                    icon.classList.add('fa-volume-xmark');
+                }
+                btn.setAttribute('aria-label', 'Sound off');
+            }
+        });
+    });
+
+    // Hover-play for triptych Vimeo video
+    document.querySelectorAll('.hover-vimeo').forEach((iframe) => {
+        iframe.addEventListener('mouseenter', () => {
+            postToVimeo(iframe, 'play');
+        });
+
+        iframe.addEventListener('mouseleave', () => {
+            postToVimeo(iframe, 'pause');
+        });
+    });
+
+    window.addEventListener('scroll', () => {
+        playVisibleVimeo();
+    });
+
+    window.addEventListener('load', () => {
+        playVisibleVimeo();
+    });
+
+    // Navbar shadow on scroll
+    window.addEventListener('scroll', () => {
+        if (navbar) {
+            if (window.scrollY > 0) navbar.style.boxShadow = '0 2px 20px rgba(0, 0, 0, 0.15)';
+            else navbar.style.boxShadow = '0 2px 10px rgba(0, 0, 0, 0.1)';
+        }
     });
 });
