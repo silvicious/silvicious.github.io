@@ -346,6 +346,10 @@ a {
     background: #000000;
 }
 
+.portfolio-item[data-index="3"] {
+    min-height: 100vh;
+}
+
 .portfolio-item.hidden {
     display: none;
 }
@@ -358,6 +362,10 @@ a {
     border: none;
     margin-bottom: 0;
     background: #000000;
+}
+
+.portfolio-item[data-index="3"] .portfolio-image {
+    height: 100vh;
 }
 
 .portfolio-image img {
@@ -384,6 +392,7 @@ a {
     min-width: 100%;
     height: 100%;
     background: #000000;
+    position: relative;
 }
 
 .project-slide img {
@@ -445,13 +454,68 @@ a {
     grid-template-columns: 1fr 1fr;
     width: 100%;
     height: 100%;
+    gap: 0;
 }
 
-.split-item {
+.quad-grid {
+    position: absolute;
+    inset: 0;
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    grid-template-rows: repeat(2, minmax(0, 1fr));
+    width: 100%;
+    height: 100%;
+    gap: 0;
+    align-items: stretch;
+    justify-items: stretch;
+}
+
+.portfolio-item[data-index="3"] .project-slider,
+.portfolio-item[data-index="3"] .project-track,
+.portfolio-item[data-index="3"] .project-slide {
+    height: 100vh;
+}
+
+.quad-item {
+    position: relative;
     width: 100%;
     height: 100%;
     overflow: hidden;
     background: #000000;
+}
+
+.quad-item img,
+.quad-item iframe {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border: 0;
+    display: block;
+}
+
+.split-item {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    background: #000000;
+}
+
+.split-item .project-info {
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 30;
+}
+
+.portfolio-item[data-index="3"] .split-item .slide-click-surface {
+    pointer-events: auto;
+    z-index: 20;
+}
+
+.portfolio-item[data-index="3"] .split-grid {
+    position: absolute;
+    inset: 0;
 }
 
 .split-item img,
@@ -523,6 +587,62 @@ a {
     cursor: pointer;
     z-index: 30;
 }
+
+.portfolio-quad-item .project-info {
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 60;
+}
+
+.portfolio-item[data-index="3"] .project-slider,
+.portfolio-item[data-index="3"] .project-track,
+.portfolio-item[data-index="3"] .project-slide {
+    height: 100vh;
+}
+
+.portfolio-quad-grid {
+    position: absolute;
+    inset: 0;
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    grid-template-rows: repeat(2, minmax(0, 1fr));
+    grid-auto-rows: 1fr;
+    width: 100%;
+    height: 100%;
+    gap: 0;
+}
+
+.quad-2x2 {
+    display: grid !important;
+    grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+    grid-template-rows: repeat(2, minmax(0, 1fr)) !important;
+}
+
+.portfolio-quad-item {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    background: #000000;
+    border: 0;
+}
+
+.portfolio-quad-item iframe {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 110%;
+    height: 110%;
+    min-width: 100%;
+    min-height: 100%;
+    border: 0;
+    display: block;
+    transform: translate(-50%, -50%) scale(1.08);
+    transform-origin: center;
+    pointer-events: none;
+}
+
 
 .project-info.is-hidden {
     opacity: 0;
@@ -935,23 +1055,6 @@ a {
         height: 36px;
         font-size: 0.9rem;
     }
-}
-
-/* ==================== Cursor Effect ==================== */
-.cursor-dot {
-    width: 6px;
-    height: 6px;
-    background: #0a0a0a;
-    border-radius: 50%;
-    position: fixed;
-    pointer-events: none;
-    z-index: 999;
-    opacity: 1;
-    transition: opacity 0.15s ease, box-shadow 0.3s ease;
-}
-
-.cursor-dot.glow {
-    box-shadow: 0 0 15px rgba(237, 255, 176, 0.5), 0 0 25px rgba(237, 255, 176, 0.3);
 }
 
 a, button {

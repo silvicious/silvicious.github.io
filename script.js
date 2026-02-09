@@ -53,20 +53,6 @@ document.addEventListener('DOMContentLoaded', () => {
         observer.observe(el);
     });
 
-    // Cursor effect
-    const cursorDot = document.createElement('div');
-    cursorDot.className = 'cursor-dot';
-    document.body.appendChild(cursorDot);
-    document.addEventListener('mousemove', (e) => {
-        cursorDot.style.left = (e.clientX - 3) + 'px';
-        cursorDot.style.top = (e.clientY - 3) + 'px';
-    });
-    const interactiveElements = document.querySelectorAll('a, button, input, textarea');
-    interactiveElements.forEach(el => {
-        el.addEventListener('mouseenter', () => cursorDot.classList.add('glow'));
-        el.addEventListener('mouseleave', () => cursorDot.classList.remove('glow'));
-    });
-
     // ---------------- Carousel & Popup ----------------
     const portfolioItems = Array.from(document.querySelectorAll('.portfolio-item'));
     const carouselModal = document.getElementById('carouselModal');
@@ -139,34 +125,53 @@ document.addEventListener('DOMContentLoaded', () => {
             });
         };
 
-        let activePopupIndex = null;
+        let activePopupSurface = null;
+        let activePopupItem = null;
 
-        const positionPopupForItem = (item) => {
-            const rect = item.getBoundingClientRect();
+        const positionPopupForItem = (element) => {
+            const rect = element.getBoundingClientRect();
             const top = window.scrollY + rect.top + (rect.height / 2);
             projectPopup.style.top = `${top}px`;
         };
 
         // Attach click handlers
-        portfolioItems.forEach((item, index) => {
-            const infoBtn = item.querySelector('.project-info');
-            const clickSurface = item.querySelector('.slide-click-surface');
-            if (!infoBtn || !clickSurface) return;
+        portfolioItems.forEach((item) => {
+            const infoButtons = Array.from(item.querySelectorAll('.project-info'));
+            if (!infoButtons.length) return;
 
-            infoBtn.addEventListener('click', (e) => {
-                e.stopPropagation();
-                popupTitle.textContent = item.dataset.title || '';
-                setPopupDescription(item.dataset.description || '');
-                positionPopupForItem(item);
-                projectPopup.style.display = 'block';
-                activePopupIndex = index;
-                infoBtn.classList.add('is-hidden');
-                clickSurface.classList.remove('is-active');
+            infoButtons.forEach((infoBtn) => {
+                const scope = infoBtn.closest('.quad-item') || infoBtn.closest('.split-item') || item;
+                const clickSurface = scope.querySelector('.slide-click-surface');
+
+                infoBtn.addEventListener('click', (e) => {
+                    e.stopPropagation();
+                    popupTitle.textContent = infoBtn.dataset.title || item.dataset.title || '';
+                    setPopupDescription(infoBtn.dataset.description || item.dataset.description || '');
+                    positionPopupForItem(scope);
+                    projectPopup.style.display = 'block';
+                    activePopupSurface = clickSurface || null;
+                    activePopupItem = item;
+                    infoBtn.classList.add('is-hidden');
+                    if (clickSurface) clickSurface.classList.remove('is-active');
+                });
+
+                if (clickSurface) {
+                    clickSurface.addEventListener('click', () => {
+                        infoBtn.classList.remove('is-hidden');
+                        clickSurface.classList.remove('is-active');
+                    });
+                }
             });
+        });
 
-            clickSurface.addEventListener('click', () => {
-                infoBtn.classList.remove('is-hidden');
-                clickSurface.classList.remove('is-active');
+        // Split slide info buttons
+        document.querySelectorAll('.split-info').forEach((btn) => {
+            btn.addEventListener('click', (e) => {
+                e.stopPropagation();
+                popupTitle.textContent = btn.dataset.title || '';
+                setPopupDescription(btn.dataset.description || '');
+                positionPopupForItem(btn);
+                projectPopup.style.display = 'block';
             });
         });
 
@@ -178,14 +183,11 @@ document.addEventListener('DOMContentLoaded', () => {
         // Popup close
         closePopup.addEventListener('click', () => {
             projectPopup.style.display = 'none';
-            if (activePopupIndex !== null) {
-                const item = portfolioItems[activePopupIndex];
-                if (item) {
-                    const clickSurface = item.querySelector('.slide-click-surface');
-                    if (clickSurface) clickSurface.classList.add('is-active');
-                }
+            if (activePopupSurface) {
+                activePopupSurface.classList.add('is-active');
             }
-            activePopupIndex = null;
+            activePopupSurface = null;
+            activePopupItem = null;
         });
 
         // Keyboard navigation
@@ -245,13 +247,16 @@ document.addEventListener('DOMContentLoaded', () => {
 
         if (bestItem) {
             const slider = bestItem.querySelector('.project-slider');
-            if (!slider) return;
-            const index = Number(slider.dataset.index || 0);
-            const slides = slider.querySelectorAll('.project-slide');
-            const current = slides[index];
-            if (!current) return;
-            const iframe = current.querySelector('.vimeo-embed');
-            if (iframe) postToVimeo(iframe, 'play');
+            if (slider) {
+                const index = Number(slider.dataset.index || 0);
+                const slides = slider.querySelectorAll('.project-slide');
+                const current = slides[index];
+                if (!current) return;
+                const iframes = current.querySelectorAll('.vimeo-embed');
+                iframes.forEach((iframe) => postToVimeo(iframe, 'play'));
+            } else {
+                bestItem.querySelectorAll('.vimeo-embed').forEach((iframe) => postToVimeo(iframe, 'play'));
+            }
         }
     };
 
@@ -285,6 +290,17 @@ document.addEventListener('DOMContentLoaded', () => {
                 update();
             });
         }
+    });
+
+    document.querySelectorAll('.portfolio-item[data-index="3"] .portfolio-quad-item').forEach((tile) => {
+        tile.addEventListener('click', (e) => {
+            if (e.target && e.target.closest('.project-info')) return;
+            if (projectPopup && projectPopup.style.display === 'block') return;
+            const infoBtn = tile.querySelector('.project-info');
+            if (infoBtn && infoBtn.classList.contains('is-hidden')) {
+                infoBtn.classList.remove('is-hidden');
+            }
+        });
     });
 
     // Audio controls for Vimeo embeds
