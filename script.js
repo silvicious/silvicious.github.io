@@ -4,6 +4,8 @@ document.addEventListener('DOMContentLoaded', () => {
     const navMenu = document.querySelector('.nav-menu');
     const navLinks = document.querySelectorAll('.nav-menu a');
     const navbar = document.querySelector('.navbar');
+    const portfolioSection = document.querySelector('#portfolio');
+
 
     // Scroll behavior for navbar
     window.addEventListener('scroll', () => {
@@ -14,6 +16,29 @@ document.addEventListener('DOMContentLoaded', () => {
             navbar.classList.remove('scrolled');
         }
     });
+
+    if (navbar && portfolioSection && 'IntersectionObserver' in window) {
+        const navObserver = new IntersectionObserver((entries) => {
+            entries.forEach((entry) => {
+                if (entry.isIntersecting) {
+                    navbar.classList.add('is-visible');
+                } else {
+                    navbar.classList.remove('is-visible');
+                }
+            });
+        }, { rootMargin: '0px 0px -60% 0px', threshold: 0 });
+
+        navObserver.observe(portfolioSection);
+    }
+
+    document.querySelectorAll('.video-poster').forEach((poster) => {
+        const slide = poster.closest('.project-slide');
+        const iframe = slide ? slide.querySelector('iframe') : null;
+        if (!iframe) return;
+        const hidePoster = () => poster.classList.add('is-hidden');
+        iframe.addEventListener('load', () => setTimeout(hidePoster, 300));
+    });
+
 
     // Mobile menu toggle (if present)
     if (hamburger) {
@@ -36,22 +61,30 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
     // Intersection observer for subtle entrance animations
-    const observerOptions = { threshold: 0.1, rootMargin: '0px 0px -100px 0px' };
-    const observer = new IntersectionObserver((entries) => {
-        entries.forEach(entry => {
-            if (entry.isIntersecting) {
-                entry.target.style.opacity = '1';
-                entry.target.style.transform = 'translateY(0)';
-            }
-        });
-    }, observerOptions);
+    const animatedItems = document.querySelectorAll('.research-card, .theme-card');
+    if ('IntersectionObserver' in window) {
+        const observerOptions = { threshold: 0.1, rootMargin: '0px 0px -100px 0px' };
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'translateY(0)';
+                }
+            });
+        }, observerOptions);
 
-    document.querySelectorAll('.research-card, .portfolio-item, .theme-card').forEach(el => {
-        el.style.opacity = '0';
-        el.style.transform = 'translateY(20px)';
-        el.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
-        observer.observe(el);
-    });
+        animatedItems.forEach(el => {
+            el.style.opacity = '0';
+            el.style.transform = 'translateY(20px)';
+            el.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+            observer.observe(el);
+        });
+    } else {
+        animatedItems.forEach(el => {
+            el.style.opacity = '1';
+            el.style.transform = 'none';
+        });
+    }
 
     // ---------------- Carousel & Popup ----------------
     const portfolioItems = Array.from(document.querySelectorAll('.portfolio-item'));
@@ -63,6 +96,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const projectPopup = document.getElementById('projectPopup');
     const popupTitle = document.getElementById('popupTitle');
     const popupDescription = document.getElementById('popupDescription');
+    const popupDate = document.querySelector('.popup-date');
     const closePopup = document.getElementById('closePopup');
 
     if (portfolioItems.length && carouselModal && carouselInner) {
@@ -147,6 +181,9 @@ document.addEventListener('DOMContentLoaded', () => {
                     e.stopPropagation();
                     popupTitle.textContent = infoBtn.dataset.title || item.dataset.title || '';
                     setPopupDescription(infoBtn.dataset.description || item.dataset.description || '');
+                    if (popupDate) {
+                        popupDate.textContent = infoBtn.dataset.year || item.dataset.year || '2023';
+                    }
                     positionPopupForItem(scope);
                     projectPopup.style.display = 'block';
                     activePopupSurface = clickSurface || null;
@@ -170,6 +207,9 @@ document.addEventListener('DOMContentLoaded', () => {
                 e.stopPropagation();
                 popupTitle.textContent = btn.dataset.title || '';
                 setPopupDescription(btn.dataset.description || '');
+                if (popupDate) {
+                    popupDate.textContent = btn.dataset.year || '2023';
+                }
                 positionPopupForItem(btn);
                 projectPopup.style.display = 'block';
             });
@@ -352,6 +392,15 @@ document.addEventListener('DOMContentLoaded', () => {
     window.addEventListener('load', () => {
         playVisibleVimeo();
         muteAllVimeo();
+        const startAtIframes = document.querySelectorAll('iframe[data-start]');
+        startAtIframes.forEach((iframe) => {
+            const startAt = Number(iframe.dataset.start || 0);
+            if (!Number.isFinite(startAt) || startAt <= 0) return;
+            setTimeout(() => {
+                postToVimeo(iframe, 'setCurrentTime', startAt);
+                postToVimeo(iframe, 'play');
+            }, 800);
+        });
     });
 
     // Keep navbar transparent on scroll
