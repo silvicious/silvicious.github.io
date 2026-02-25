@@ -5,6 +5,12 @@ document.addEventListener('DOMContentLoaded', () => {
     const navLinks = document.querySelectorAll('.nav-menu a');
     const navbar = document.querySelector('.navbar');
     const portfolioSection = document.querySelector('#portfolio');
+    const contactToggle = document.getElementById('contactToggle');
+    const contactPopup = document.getElementById('contactPopup');
+    const contactPopupBackdrop = document.getElementById('contactPopupBackdrop');
+    const closeContactPopup = document.getElementById('closeContactPopup');
+    const contactForm = document.getElementById('contactForm');
+    const contactStatus = document.getElementById('contactStatus');
 
 
     // Scroll behavior for navbar
@@ -59,6 +65,53 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         });
     });
+
+    if (contactToggle && contactPopup) {
+        const openContactPopup = () => {
+            contactPopup.classList.add('is-open');
+            contactPopup.setAttribute('aria-hidden', 'false');
+            contactToggle.setAttribute('aria-expanded', 'true');
+            const firstField = contactPopup.querySelector('input, textarea');
+            if (firstField) firstField.focus();
+            if (contactStatus) contactStatus.textContent = '';
+        };
+
+        const closePopup = () => {
+            contactPopup.classList.remove('is-open');
+            contactPopup.setAttribute('aria-hidden', 'true');
+            contactToggle.setAttribute('aria-expanded', 'false');
+        };
+
+        contactToggle.addEventListener('click', openContactPopup);
+        if (closeContactPopup) closeContactPopup.addEventListener('click', closePopup);
+        if (contactPopupBackdrop) contactPopupBackdrop.addEventListener('click', closePopup);
+
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape' && contactPopup.classList.contains('is-open')) {
+                closePopup();
+            }
+        });
+    }
+
+    if (contactForm) {
+        contactForm.addEventListener('submit', (e) => {
+            e.preventDefault();
+            const name = contactForm.querySelector('#contactName')?.value.trim();
+            const email = contactForm.querySelector('#contactEmail')?.value.trim();
+            const message = contactForm.querySelector('#contactMessage')?.value.trim();
+
+            const recipient = 'its.silvicious@gmail.com';
+            const subject = encodeURIComponent('New message from silviciouƨ website');
+            const body = encodeURIComponent(`Name: ${name}\nEmail: ${email}\n\n${message}`);
+            const mailto = `mailto:${recipient}?subject=${subject}&body=${body}`;
+
+            if (contactStatus) {
+                contactStatus.textContent = 'Opening your email app...';
+            }
+
+            window.location.href = mailto;
+        });
+    }
 
     // Intersection observer for subtle entrance animations
     const animatedItems = document.querySelectorAll('.research-card, .theme-card');
@@ -299,6 +352,159 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         }
     };
+
+    const splitFirstPortfolioSlidesForMobile = () => {
+        if (!window.matchMedia('(max-width: 768px)').matches) return;
+
+        const firstItem = document.querySelector('.portfolio-item[data-index="0"]');
+        const firstSlider = firstItem ? firstItem.querySelector('.project-slider') : null;
+        const firstTrack = firstSlider ? firstSlider.querySelector('.project-track') : null;
+        if (!firstTrack || firstTrack.dataset.mobileSplit === '1') return;
+
+        const originalSlides = Array.from(firstTrack.children).filter((child) => child.classList && child.classList.contains('project-slide'));
+        if (originalSlides.length < 2) return;
+
+        const rebuiltSlides = [];
+
+        originalSlides.forEach((slide, slideIndex) => {
+            const triptych = slide.querySelector('.triptych');
+
+            if (slideIndex === 0 || !triptych) {
+                rebuiltSlides.push(slide);
+                return;
+            }
+
+            const triptychItems = Array.from(triptych.querySelectorAll('.triptych-item'));
+            triptychItems.forEach((triptychItem) => {
+                const media = triptychItem.querySelector('iframe, img, video');
+                if (!media) return;
+
+                const singleMediaSlide = document.createElement('div');
+                singleMediaSlide.className = 'project-slide';
+                singleMediaSlide.appendChild(media.cloneNode(true));
+                rebuiltSlides.push(singleMediaSlide);
+            });
+        });
+
+        if (!rebuiltSlides.length) return;
+
+        firstTrack.replaceChildren(...rebuiltSlides);
+        firstTrack.dataset.mobileSplit = '1';
+        if (firstSlider) {
+            firstSlider.dataset.index = '0';
+        }
+    };
+
+    const splitSecondPortfolioMosaicForMobile = () => {
+        if (!window.matchMedia('(max-width: 768px)').matches) return;
+
+        const secondItem = document.querySelector('.portfolio-item[data-index="1"]');
+        const secondSlider = secondItem ? secondItem.querySelector('.project-slider') : null;
+        const secondTrack = secondSlider ? secondSlider.querySelector('.project-track') : null;
+        if (!secondTrack || secondTrack.dataset.mobileMosaicSplit === '1') return;
+
+        const slides = Array.from(secondTrack.children).filter((child) => child.classList && child.classList.contains('project-slide'));
+        if (!slides.length) return;
+
+        const mosaicSlide = slides.find((slide) => slide.querySelector('.mosaic-grid'));
+        if (!mosaicSlide) return;
+
+        const mosaicGrid = mosaicSlide.querySelector('.mosaic-grid');
+        const mosaicItems = mosaicGrid ? Array.from(mosaicGrid.querySelectorAll('.mosaic-item')) : [];
+        if (mosaicItems.length < 12) return;
+
+        const leftHalfIndexes = [0, 1, 2, 6, 7, 8];
+        const rightHalfIndexes = [3, 4, 5, 9, 10, 11];
+
+        const createHalfSlide = (indexes) => {
+            const slide = document.createElement('div');
+            slide.className = 'project-slide';
+
+            const grid = document.createElement('div');
+            grid.className = 'mosaic-grid';
+            grid.style.gridTemplateColumns = 'repeat(3, 1fr)';
+            grid.style.gridTemplateRows = 'repeat(2, 1fr)';
+
+            indexes.forEach((itemIndex) => {
+                const item = mosaicItems[itemIndex];
+                if (item) grid.appendChild(item.cloneNode(true));
+            });
+
+            slide.appendChild(grid);
+            return slide;
+        };
+
+        const leftSlide = createHalfSlide(leftHalfIndexes);
+        const rightSlide = createHalfSlide(rightHalfIndexes);
+
+        mosaicSlide.replaceWith(leftSlide);
+        leftSlide.insertAdjacentElement('afterend', rightSlide);
+
+        slides.forEach((slide) => {
+            if (slide === mosaicSlide) return;
+            const placeholderImage = slide.querySelector('img[src*="via.placeholder.com"]');
+            if (placeholderImage) {
+                slide.remove();
+            }
+        });
+
+        secondTrack.dataset.mobileMosaicSplit = '1';
+        if (secondSlider) {
+            secondSlider.dataset.index = '0';
+        }
+    };
+
+    const splitThirdPortfolioSlidesForMobile = () => {
+        if (!window.matchMedia('(max-width: 768px)').matches) return;
+
+        const thirdItem = document.querySelector('.portfolio-item[data-index="2"]');
+        const thirdSlider = thirdItem ? thirdItem.querySelector('.project-slider') : null;
+        const thirdTrack = thirdSlider ? thirdSlider.querySelector('.project-track') : null;
+        if (!thirdTrack || thirdTrack.dataset.mobileSplit === '1') return;
+
+        const originalSlides = Array.from(thirdTrack.children).filter((child) => child.classList && child.classList.contains('project-slide'));
+        if (originalSlides.length < 2) return;
+
+        const rebuiltSlides = [];
+
+        originalSlides.forEach((slide, slideIndex) => {
+            const splitGrid = slide.querySelector('.split-grid');
+
+            if (slideIndex === 0 || !splitGrid) {
+                rebuiltSlides.push(slide);
+                return;
+            }
+
+            const splitItems = Array.from(splitGrid.querySelectorAll('.split-item'));
+            splitItems.forEach((splitItem) => {
+                const media = splitItem.querySelector('iframe, img, video');
+                if (!media) return;
+
+                const singleMediaSlide = document.createElement('div');
+                singleMediaSlide.className = 'project-slide';
+                singleMediaSlide.appendChild(media.cloneNode(true));
+
+                const audioButton = splitItem.querySelector('.video-audio');
+                if (audioButton) {
+                    singleMediaSlide.appendChild(audioButton.cloneNode(true));
+                }
+
+                rebuiltSlides.push(singleMediaSlide);
+            });
+        });
+
+        if (!rebuiltSlides.length) return;
+
+        thirdTrack.replaceChildren(...rebuiltSlides);
+        thirdTrack.dataset.mobileSplit = '1';
+        if (thirdSlider) {
+            thirdSlider.dataset.index = '0';
+        }
+    };
+
+    splitFirstPortfolioSlidesForMobile();
+    splitSecondPortfolioMosaicForMobile();
+    splitThirdPortfolioSlidesForMobile();
 
     sliders.forEach((slider) => {
         const track = slider.querySelector('.project-track');

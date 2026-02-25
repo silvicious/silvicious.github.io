@@ -3,9 +3,41 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Silvicious - Digital Fashion Portfolio</title>
+        <title>silvicious</title>
+        <meta name="description" content="Portfolio of Silvia, a speculative design artist and fashion activist creating radical fashion futures through design, technology, and critical storytelling.">
+        <meta name="keywords" content="speculative design, speculative design artist, fashion activist, fashion futurist, digital fashion, radical design">
+        <meta name="author" content="Silvia">
+        <meta name="robots" content="index, follow, max-image-preview:large">
+        <link rel="canonical" href="https://www.silvicious.com/">
+        <meta property="og:type" content="website">
+        <meta property="og:site_name" content="silviciouƨ">
+        <meta property="og:title" content="Silvia | Speculative Design Artist & Fashion Activist">
+        <meta property="og:description" content="Speculative design, artistic research, and fashion activism at the intersection of people, technology, and culture.">
+        <meta property="og:url" content="https://www.silvicious.com/">
+        <meta property="og:image" content="https://www.silvicious.com/images/about-image.png">
+        <meta name="twitter:card" content="summary_large_image">
+        <meta name="twitter:title" content="Silvia | Speculative Design Artist & Fashion Activist">
+        <meta name="twitter:description" content="Speculative design, artistic research, and fashion activism through radical fashion narratives.">
+        <meta name="twitter:image" content="https://www.silvicious.com/images/about-image.png">
     <link rel="stylesheet" href="styles.css?v=20260215-2">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+        <script type="application/ld+json">
+        {
+            "@context": "https://schema.org",
+            "@type": "Person",
+            "name": "Silvia",
+            "url": "https://www.silvicious.com/",
+            "jobTitle": "Speculative Design Artist and Fashion Activist",
+            "description": "Fashion futurist working through speculative design, artistic research, and fashion activism.",
+            "knowsAbout": [
+                "Speculative Design",
+                "Fashion Activism",
+                "Digital Fashion",
+                "Fashion Futures",
+                "Critical Design"
+            ]
+        }
+        </script>
 </head>
 <body>
     <!-- Navigation -->
@@ -605,8 +637,11 @@
             <h2 class="section-title section-title-about">About</h2>
             <div class="about-content">
                 <div class="about-text">
-                    <p>I'm Silvia, I am a Fashion Futurist & Creative Strategist.</p>
-                    <p>I love playing with technology, exploring quirky trends, and venturing into uncharted territories where radical design, people, and tech collide.</p>
+                    <p>Hello! I'm Silvia, and I am a fashion futurist.</p>
+                    <p>I overthink. Therefore, I imagine alternative futures where radical design, people, and tech collide.</p>
+                    <p>I turn my fashion contradictions into speculative narratives designed to inspire reflection and curiosity on how we consume, perform, and relate to fashion.</p>
+                    <p>I may not have answers, but I take fashion seriou<span class="flipped-s">s</span>ly.</p>
+                    <button class="about-cta about-contact-toggle" id="contactToggle" type="button" aria-expanded="false" aria-controls="contactPopup">ASK ME ANYTHING</button>
                 </div>
                 <div class="about-image">
                     <img src="images/about-image.png" alt="Silvia - Fashion Futurist">
@@ -614,6 +649,26 @@
             </div>
         </div>
     </section>
+
+    <div class="contact-popup-wrap" id="contactPopup" aria-hidden="true">
+        <div class="contact-popup__backdrop" id="contactPopupBackdrop"></div>
+        <div class="project-popup contact-popup-panel" role="dialog" aria-modal="true" aria-label="Contact form">
+            <button class="close-popup" id="closeContactPopup" aria-label="Close contact form">×</button>
+            <form id="contactForm" class="contact-form contact-form-inline">
+                <label for="contactName">Name</label>
+                <input id="contactName" name="name" type="text" autocomplete="name" required>
+
+                <label for="contactEmail">Email</label>
+                <input id="contactEmail" name="email" type="email" autocomplete="email" required>
+
+                <label for="contactMessage">Message</label>
+                <textarea id="contactMessage" name="message" rows="4" required></textarea>
+
+                <button class="contact-submit" type="submit">send</button>
+                <p class="contact-status" id="contactStatus" role="status" aria-live="polite"></p>
+            </form>
+        </div>
+    </div>
 
     <!-- Footer -->
     <footer class="footer">
@@ -627,12 +682,11 @@
                     </div>
                 </div>
                 <div class="footer-section footer-section-center">
-                    <p>if you're not asking questions, you're just wearing clothes.</p>
+                    <p>if you're not asking questions,<br class="footer-poem-break">you're just wearing clothes.</p>
                 </div>
                 <div class="footer-section footer-section-right">
                     <ul>
                         <li><a href="#portfolio">PORTFOLIO</a></li>
-                        <li><a href="#about">ABOUT</a></li>
                     </ul>
                 </div>
             </div>
