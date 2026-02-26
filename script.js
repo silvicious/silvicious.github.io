@@ -207,9 +207,47 @@ document.addEventListener('DOMContentLoaded', () => {
             if (!parts.length) return;
             parts.forEach(part => {
                 const p = document.createElement('p');
-                p.textContent = part;
+                if (part.startsWith('🎵')) {
+                    p.classList.add('popup-meta');
+                    const [metaText, ...tagSegments] = part.split('|').map(value => value.trim());
+                    const tagText = tagSegments.join('|').trim();
+                    const metaSpan = document.createElement('span');
+                    metaSpan.textContent = metaText || part;
+                    p.appendChild(metaSpan);
+
+                    if (tagText) {
+                        const tagsWrap = document.createElement('span');
+                        tagsWrap.classList.add('popup-tags');
+                        const tags = tagText.split(',').map(value => value.trim()).filter(Boolean);
+                        tags.forEach((tag) => {
+                            const pill = document.createElement('span');
+                            pill.classList.add('popup-pill');
+                            pill.textContent = tag;
+                            tagsWrap.appendChild(pill);
+                        });
+                        p.appendChild(tagsWrap);
+                    }
+                } else {
+                    p.textContent = part;
+                }
                 popupDescription.appendChild(p);
             });
+        };
+
+        const formatPopupYear = (value) => {
+            const year = String(value || '').trim();
+            return year;
+        };
+
+        const setPopupHeader = (titleValue, yearValue) => {
+            const title = String(titleValue || '').trim();
+            const year = formatPopupYear(yearValue);
+            if (popupTitle) {
+                popupTitle.textContent = year ? `${title},` : title;
+            }
+            if (popupDate) {
+                popupDate.textContent = year;
+            }
         };
 
         let activePopupSurface = null;
@@ -232,11 +270,8 @@ document.addEventListener('DOMContentLoaded', () => {
 
                 infoBtn.addEventListener('click', (e) => {
                     e.stopPropagation();
-                    popupTitle.textContent = infoBtn.dataset.title || item.dataset.title || '';
+                    setPopupHeader(infoBtn.dataset.title || item.dataset.title || '', infoBtn.dataset.year || item.dataset.year || '2023');
                     setPopupDescription(infoBtn.dataset.description || item.dataset.description || '');
-                    if (popupDate) {
-                        popupDate.textContent = infoBtn.dataset.year || item.dataset.year || '2023';
-                    }
                     positionPopupForItem(scope);
                     projectPopup.style.display = 'block';
                     activePopupSurface = clickSurface || null;
@@ -258,11 +293,8 @@ document.addEventListener('DOMContentLoaded', () => {
         document.querySelectorAll('.split-info').forEach((btn) => {
             btn.addEventListener('click', (e) => {
                 e.stopPropagation();
-                popupTitle.textContent = btn.dataset.title || '';
+                setPopupHeader(btn.dataset.title || '', btn.dataset.year || '2023');
                 setPopupDescription(btn.dataset.description || '');
-                if (popupDate) {
-                    popupDate.textContent = btn.dataset.year || '2023';
-                }
                 positionPopupForItem(btn);
                 projectPopup.style.display = 'block';
             });

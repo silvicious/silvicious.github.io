@@ -17,6 +17,8 @@
 
 html {
     scroll-behavior: smooth;
+    width: 100%;
+    overflow-x: hidden;
 }
 
 body {
@@ -24,6 +26,8 @@ body {
     color: var(--text-dark);
     line-height: 1.6;
     overflow-x: hidden;
+    width: 100%;
+    max-width: 100%;
     font-weight: 400;
 }
 
@@ -985,8 +989,8 @@ a {
 .project-popup .popup-header {
     display: flex;
     align-items: center;
-    justify-content: space-between;
-    gap: 16px;
+    justify-content: flex-start;
+    gap: 0;
     padding-right: 28px;
     margin-bottom: 6px;
 }
@@ -1014,7 +1018,7 @@ a {
     letter-spacing: 0.8px;
     text-transform: uppercase;
     color: rgba(10, 10, 10, 0.55);
-    margin: 0;
+    margin: 0 0 0 4px;
     line-height: 1.2;
 }
 
@@ -1029,6 +1033,37 @@ a {
     font-size: 0.95rem;
     line-height: 1.5;
     margin-bottom: 8px;
+}
+
+#popupDescription p.popup-meta {
+    font-size: 0.72rem;
+    letter-spacing: 0.25px;
+    text-transform: uppercase;
+    opacity: 0.72;
+    margin-top: 14px;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    flex-wrap: nowrap;
+    white-space: nowrap;
+}
+
+#popupDescription p.popup-meta .popup-tags {
+    margin-left: auto;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+}
+
+#popupDescription p.popup-meta .popup-pill {
+    display: inline-flex;
+    align-items: center;
+    padding: 1px 7px;
+    border: 1px solid rgba(10, 10, 10, 0.2);
+    border-radius: 999px;
+    line-height: 1.2;
+    letter-spacing: 0.35px;
+    opacity: 1;
 }
 
 .portfolio-item:hover .portfolio-image img {
@@ -1188,6 +1223,28 @@ a {
 
 /* ==================== Responsive Design ==================== */
 @media (max-width: 768px) {
+    html,
+    body {
+        width: 100%;
+        max-width: 100%;
+        overflow-x: hidden;
+    }
+
+    .navbar,
+    .hero,
+    .about,
+    .portfolio,
+    .footer,
+    .portfolio-grid,
+    .portfolio-item,
+    .portfolio-image,
+    .project-slider,
+    .project-track,
+    .project-slide {
+        width: 100%;
+        max-width: 100%;
+    }
+
     .hamburger {
         display: flex;
     }
