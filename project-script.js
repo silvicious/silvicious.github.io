@@ -197,8 +197,18 @@ function setupSliderEventListeners() {
     });
 }
 
+function syncSliderMediaMode() {
+    const sliderWrapper = document.querySelector('.slider-wrapper');
+    const slides = document.querySelectorAll('.slide');
+    if (!sliderWrapper || !slides.length) return;
+
+    const hasMotionMedia = Array.from(slides).some((slide) => slide.querySelector('iframe, video'));
+    sliderWrapper.classList.toggle('has-motion-media', hasMotionMedia);
+}
+
 // Initialize on page load
 document.addEventListener('DOMContentLoaded', () => {
     const projectId = getProjectId();
     loadProject(projectId);
+    syncSliderMediaMode();
 });

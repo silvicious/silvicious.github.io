@@ -308,6 +308,48 @@ document.addEventListener('DOMContentLoaded', () => {
         iframe.contentWindow.postMessage(message, '*');
     };
 
+    const iframeCoverSelector = 'iframe.vimeo-embed, iframe.hover-vimeo, iframe.mosaic-vimeo, iframe.split-vimeo';
+
+    const getIframeMediaRatio = () => {
+        return 16 / 9;
+    };
+
+    const sizeIframeToCover = (iframe, mediaRatio) => {
+        const container = iframe.parentElement;
+        if (!container) return;
+
+        const rect = container.getBoundingClientRect();
+        const containerWidth = rect.width;
+        const containerHeight = rect.height;
+
+        if (!containerWidth || !containerHeight) return;
+
+        const containerRatio = containerWidth / containerHeight;
+        let targetWidth;
+        let targetHeight;
+
+        if (containerRatio > mediaRatio) {
+            targetWidth = containerWidth;
+            targetHeight = containerWidth / mediaRatio;
+        } else {
+            targetHeight = containerHeight;
+            targetWidth = containerHeight * mediaRatio;
+        }
+
+        iframe.style.width = `${targetWidth}px`;
+        iframe.style.height = `${targetHeight}px`;
+        iframe.style.left = '50%';
+        iframe.style.top = '50%';
+        iframe.style.transform = 'translate(-50%, -50%)';
+    };
+
+    const applyIframeCoverSizing = () => {
+        const mediaRatio = getIframeMediaRatio();
+        document.querySelectorAll(iframeCoverSelector).forEach((iframe) => {
+            sizeIframeToCover(iframe, mediaRatio);
+        });
+    };
+
     // Ensure videos stay muted until users click the volume toggle
     const muteAllVimeo = () => {
         document.querySelectorAll('.vimeo-embed, .hover-vimeo, .mosaic-vimeo, .split-vimeo').forEach((iframe) => {
@@ -413,32 +455,12 @@ document.addEventListener('DOMContentLoaded', () => {
         const mosaicItems = mosaicGrid ? Array.from(mosaicGrid.querySelectorAll('.mosaic-item')) : [];
         if (mosaicItems.length < 12) return;
 
-        const leftHalfIndexes = [0, 1, 2, 6, 7, 8];
-        const rightHalfIndexes = [3, 4, 5, 9, 10, 11];
-
-        const createHalfSlide = (indexes) => {
-            const slide = document.createElement('div');
-            slide.className = 'project-slide';
-
-            const grid = document.createElement('div');
-            grid.className = 'mosaic-grid';
-            grid.style.gridTemplateColumns = 'repeat(3, 1fr)';
-            grid.style.gridTemplateRows = 'repeat(2, 1fr)';
-
-            indexes.forEach((itemIndex) => {
-                const item = mosaicItems[itemIndex];
-                if (item) grid.appendChild(item.cloneNode(true));
-            });
-
-            slide.appendChild(grid);
-            return slide;
-        };
-
-        const leftSlide = createHalfSlide(leftHalfIndexes);
-        const rightSlide = createHalfSlide(rightHalfIndexes);
-
-        mosaicSlide.replaceWith(leftSlide);
-        leftSlide.insertAdjacentElement('afterend', rightSlide);
+        mosaicGrid.style.gridTemplateColumns = 'repeat(3, 1fr)';
+        mosaicGrid.style.gridTemplateRows = 'repeat(4, minmax(0, 1fr))';
+        mosaicGrid.style.height = 'auto';
+        mosaicGrid.style.minHeight = '140vh';
+        mosaicGrid.style.aspectRatio = '3 / 7';
+        mosaicGrid.style.width = '100%';
 
         slides.forEach((slide) => {
             if (slide === mosaicSlide) return;
@@ -505,6 +527,7 @@ document.addEventListener('DOMContentLoaded', () => {
     splitFirstPortfolioSlidesForMobile();
     splitSecondPortfolioMosaicForMobile();
     splitThirdPortfolioSlidesForMobile();
+    applyIframeCoverSizing();
 
     sliders.forEach((slider) => {
         const track = slider.querySelector('.project-track');
@@ -596,6 +619,7 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
     window.addEventListener('load', () => {
+        applyIframeCoverSizing();
         playVisibleVimeo();
         muteAllVimeo();
         const startAtIframes = document.querySelectorAll('iframe[data-start]');
@@ -606,6 +630,22 @@ document.addEventListener('DOMContentLoaded', () => {
                 postToVimeo(iframe, 'setCurrentTime', startAt);
                 postToVimeo(iframe, 'play');
             }, 800);
+        });
+    });
+
+    let resizeTimer = null;
+    window.addEventListener('resize', () => {
+        if (resizeTimer) {
+            window.clearTimeout(resizeTimer);
+        }
+        resizeTimer = window.setTimeout(() => {
+            applyIframeCoverSizing();
+        }, 120);
+    });
+
+    document.querySelectorAll(iframeCoverSelector).forEach((iframe) => {
+        iframe.addEventListener('load', () => {
+            applyIframeCoverSizing();
         });
     });
 

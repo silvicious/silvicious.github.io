@@ -296,10 +296,13 @@ a {
     gap: 6rem;
     align-items: stretch;
     min-height: auto;
-    padding: 88px 60px 0;
+    padding: 104px 60px 0;
 }
 
 .about-text {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
     line-height: 1.9;
 }
 
@@ -335,6 +338,7 @@ a {
 .about-contact-toggle {
     margin-top: 2rem;
     max-width: 100%;
+    align-self: center;
 }
 
 .about-contact-shell {
@@ -596,8 +600,16 @@ a {
 
 .vimeo-embed,
 .hover-vimeo {
+    position: absolute;
+    top: 50%;
+    left: 50%;
     width: 100%;
     height: 100%;
+    min-width: 100%;
+    min-height: 100%;
+    transform: translate(-50%, -50%);
+    border: 0;
+    display: block;
 }
 
 .mosaic-grid {
@@ -617,9 +629,16 @@ a {
 }
 
 .mosaic-vimeo {
+    position: absolute;
+    top: 50%;
+    left: 50%;
     width: 100%;
     height: 100%;
+    min-width: 100%;
+    min-height: 100%;
+    transform: translate(-50%, -50%);
     border: 0;
+    display: block;
 }
 
 .mosaic-label {
@@ -711,6 +730,15 @@ a {
     object-fit: cover;
     border: 0;
     display: block;
+}
+
+.split-vimeo {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    min-width: 100%;
+    min-height: 100%;
+    transform: translate(-50%, -50%);
 }
 
 .triptych {
@@ -1058,6 +1086,8 @@ a {
 
 .footer-section-left {
     text-align: left;
+    display: flex;
+    justify-content: center;
 }
 
 .footer-section-center p {
@@ -1104,12 +1134,17 @@ a {
 .social-links {
     display: flex;
     gap: 2rem;
+    width: 100%;
+    justify-content: center;
+    margin: 0 auto;
 }
 
 .social-links a {
     display: inline-flex;
     align-items: center;
     justify-content: center;
+    width: 44px;
+    height: 44px;
     font-size: 1.6rem;
     color: var(--text-dark);
     transition: all 0.3s ease;
@@ -1197,7 +1232,7 @@ a {
     .about-content {
         grid-template-columns: 1fr;
         gap: 3rem;
-        padding: 76px 30px 0;
+        padding: 88px 30px 0;
     }
 
     .about-image {
@@ -1218,20 +1253,46 @@ a {
         padding: 0;
     }
 
+    .portfolio .container {
+        max-width: 100%;
+        padding: 0;
+    }
+
     .portfolio-grid {
         grid-template-columns: 1fr;
         gap: 0;
     }
 
-    .project-slide > iframe.vimeo-embed,
-    .project-slide .split-vimeo,
-    .project-slide .hover-vimeo {
-        transform: scale(1.22);
-        transform-origin: center center;
+    .portfolio-item[data-index="1"],
+    .portfolio-item[data-index="1"] .portfolio-image,
+    .portfolio-item[data-index="1"] .project-slider,
+    .portfolio-item[data-index="1"] .project-track,
+    .portfolio-item[data-index="1"] .project-slide {
+        height: auto;
+        min-height: 0;
     }
 
+    .portfolio-item[data-index="1"] .mosaic-grid {
+        grid-template-columns: repeat(3, 1fr);
+        grid-template-rows: repeat(4, minmax(0, 1fr));
+        height: auto;
+        min-height: 140vh;
+        aspect-ratio: 3 / 7;
+        width: 100%;
+        gap: 0;
+    }
 
+    .portfolio-item[data-index="1"] .mosaic-item {
+        position: relative;
+        height: 100%;
+        min-height: 0;
+        overflow: hidden;
+    }
 
+    .portfolio-item[data-index="1"] .mosaic-vimeo {
+        min-width: 100%;
+        min-height: 100%;
+    }
 
     .footer-content {
         grid-template-columns: 1fr;
@@ -1254,9 +1315,13 @@ a {
     }
 
     .social-links {
-        width: 100%;
+        width: fit-content;
         justify-content: center;
         margin: 0 auto;
+    }
+
+    .social-links a[title="Threads"] {
+        display: none;
     }
 
     .footer-section-left {
@@ -1306,7 +1371,7 @@ a {
     }
 
     .about-content {
-        padding: 68px 20px 0;
+        padding: 76px 20px 0;
     }
 
     .about-image {
