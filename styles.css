@@ -991,7 +991,7 @@ a {
     align-items: center;
     justify-content: flex-start;
     gap: 0;
-    padding-right: 28px;
+    padding-right: 0;
     margin-bottom: 6px;
 }
 .project-popup .close-popup {
@@ -1024,7 +1024,7 @@ a {
 
 #popupDescription {
     max-width: 100%;
-    padding-right: 28px;
+    padding-right: 0;
     word-break: break-word;
     margin-top: 6px;
 }
@@ -1349,6 +1349,17 @@ a {
     .portfolio-item[data-index="1"] .mosaic-vimeo {
         min-width: 100%;
         min-height: 100%;
+    }
+
+    #popupDescription p.popup-meta {
+        white-space: normal;
+        flex-wrap: wrap;
+    }
+
+    #popupDescription p.popup-meta .popup-tags {
+        width: 100%;
+        margin-left: 0;
+        justify-content: flex-end;
     }
 
     .footer-content {
