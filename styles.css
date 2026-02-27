@@ -1435,8 +1435,8 @@ a {
         padding: 0 8px;
     }
 
-    .about-text p {
-        font-size: 1rem;
+    .about-text p:not(.about-intro-line) {
+        font-size: 1.06rem;
     }
 
     .about-intro-line {
@@ -1672,8 +1672,8 @@ a {
         padding: 0 10px;
     }
 
-    .about-text p {
-        font-size: 0.94rem;
+    .about-text p:not(.about-intro-line) {
+        font-size: 1rem;
     }
 
     .about-intro-line {
