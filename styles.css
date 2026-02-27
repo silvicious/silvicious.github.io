@@ -1422,7 +1422,7 @@ a {
     }
 
     .section-title-about {
-        top: 34px;
+        top: 23px;
     }
 
     .about-content {
@@ -1433,6 +1433,10 @@ a {
 
     .about-text {
         padding: 0 8px;
+    }
+
+    .about-text p {
+        font-size: 0.95rem;
     }
 
     .about-image {
@@ -1656,11 +1660,15 @@ a {
     }
 
     .section-title-about {
-        top: 26px;
+        top: 17px;
     }
 
     .about-text {
         padding: 0 10px;
+    }
+
+    .about-text p {
+        font-size: 0.88rem;
     }
 
     .theme-card {
