@@ -300,14 +300,40 @@ document.addEventListener('DOMContentLoaded', () => {
             popupDescription.innerHTML = '';
             const parts = String(text || '').split('||').map(part => part.trim()).filter(Boolean);
             if (!parts.length) return;
+            const appendLinkedText = (target, value) => {
+                const source = String(value || '');
+                const linkPattern = /\[([^\]]+)\]\((https?:\/\/[^\s)]+)\)/g;
+                let lastIndex = 0;
+                let match;
+
+                while ((match = linkPattern.exec(source)) !== null) {
+                    if (match.index > lastIndex) {
+                        target.appendChild(document.createTextNode(source.slice(lastIndex, match.index)));
+                    }
+
+                    const anchor = document.createElement('a');
+                    anchor.href = match[2];
+                    anchor.target = '_blank';
+                    anchor.rel = 'noopener noreferrer';
+                    anchor.textContent = match[1];
+                    target.appendChild(anchor);
+
+                    lastIndex = match.index + match[0].length;
+                }
+
+                if (lastIndex < source.length) {
+                    target.appendChild(document.createTextNode(source.slice(lastIndex)));
+                }
+            };
+
             parts.forEach(part => {
                 const p = document.createElement('p');
-                if (part.startsWith('🎵')) {
+                if (part.startsWith('🎵') || part.includes('|')) {
                     p.classList.add('popup-meta');
                     const [metaText, ...tagSegments] = part.split('|').map(value => value.trim());
                     const tagText = tagSegments.join('|').trim();
                     const metaSpan = document.createElement('span');
-                    metaSpan.textContent = metaText || part;
+                    appendLinkedText(metaSpan, metaText || part);
                     p.appendChild(metaSpan);
 
                     if (tagText) {
