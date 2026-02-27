@@ -1422,7 +1422,7 @@ a {
     }
 
     .section-title-about {
-        top: 23px;
+        top: calc((62px - 1.1rem) / 2);
     }
 
     .about-content {
@@ -1665,7 +1665,7 @@ a {
     }
 
     .section-title-about {
-        top: 17px;
+        top: calc((46px - 1rem) / 2);
     }
 
     .about-text {
