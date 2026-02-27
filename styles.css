@@ -90,6 +90,8 @@ a {
     display: inline-block;
     font: inherit;
     transform: scaleX(-1);
+    transform-origin: center;
+    line-height: 1;
 }
 
 @keyframes flipS {
@@ -655,6 +657,117 @@ a {
     color: white;
     border-radius: 999px;
     letter-spacing: 0.3px;
+    border: none;
+    font-family: inherit;
+    line-height: 1.2;
+    cursor: pointer;
+}
+
+.snapcode-popup-wrap .contact-popup__backdrop {
+    background: rgba(0, 0, 0, 0.65);
+}
+
+.snapcode-popup-panel {
+    position: fixed;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 2301;
+    background: #000000;
+    padding: 12px;
+    border-radius: 4px;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    box-shadow: 0 12px 28px rgba(0, 0, 0, 0.2);
+}
+
+.snapcode-popup-content {
+    display: block;
+}
+
+.snapcode-popup-panel img {
+    display: block;
+    width: min(320px, calc(100vw - 96px));
+    max-height: calc(100vh - 180px);
+    height: auto;
+}
+
+.snapcode-popup-wrap.has-video .snapcode-popup-content {
+    display: grid;
+    grid-template-columns: minmax(260px, 420px) minmax(100px, 160px);
+    gap: 10px;
+    align-items: center;
+    justify-content: center;
+}
+
+.snapcode-popup-wrap.has-video .snapcode-video-wrap {
+    order: 1;
+    justify-self: center;
+}
+
+.snapcode-popup-wrap.has-video #snapcodeImage {
+    order: 2;
+    justify-self: center;
+    width: min(140px, calc(100vw - 140px));
+    max-height: calc(100vh - 240px);
+}
+
+.snapcode-video-wrap {
+    display: none;
+    position: relative;
+}
+
+.snapcode-video-wrap.is-visible {
+    display: block;
+}
+
+.snapcode-video-wrap iframe {
+    display: block;
+    width: min(420px, calc(100vw - 150px));
+    aspect-ratio: 9 / 16;
+    border: 0;
+}
+
+.snapcode-video-mute {
+    position: absolute;
+    right: 12px;
+    bottom: 12px;
+    border: none;
+    background: rgba(10, 10, 10, 0.82);
+    color: #ffffff;
+    padding: 10px 14px;
+    border-radius: 20px;
+    font-size: 0.85rem;
+    cursor: pointer;
+    z-index: 2;
+}
+
+.snapcode-video-mute i {
+    font-size: 1rem;
+}
+
+@media (max-width: 768px) {
+    .snapcode-popup-wrap.has-video .snapcode-popup-content {
+        grid-template-columns: 1fr;
+        justify-items: center;
+    }
+
+    .snapcode-popup-wrap.has-video .snapcode-video-wrap,
+    .snapcode-popup-wrap.has-video #snapcodeImage {
+        order: initial;
+    }
+}
+
+.snapcode-close {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    background: rgba(255, 255, 255, 0.9);
+    border: none;
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    font-size: 1rem;
+    cursor: pointer;
 }
 
 .split-grid {
@@ -1293,10 +1406,18 @@ a {
         left: 30px;
     }
 
+    .section-title-about {
+        top: 24px;
+    }
+
     .about-content {
         grid-template-columns: 1fr;
         gap: 3rem;
         padding: 88px 30px 0;
+    }
+
+    .about-text {
+        padding: 0 8px;
     }
 
     .about-image {
@@ -1356,6 +1477,12 @@ a {
     .portfolio-item[data-index="1"] .mosaic-vimeo {
         min-width: 100%;
         min-height: 100%;
+    }
+
+    .mosaic-label {
+        font-size: 0.6rem;
+        padding: 4px 7px;
+        white-space: nowrap;
     }
 
     .portfolio,
@@ -1435,6 +1562,11 @@ a {
         margin: 0 auto;
     }
 
+    .social-links a[title="LinkedIn"],
+    .social-links a[title="Instagram"] {
+        font-size: 1.75rem;
+    }
+
     .social-links a[title="Threads"] {
         display: none;
     }
@@ -1504,8 +1636,22 @@ a {
         left: 20px;
     }
 
+    .section-title-about {
+        top: 18px;
+    }
+
+    .about-text {
+        padding: 0 10px;
+    }
+
     .theme-card {
         padding: 1.5rem;
+    }
+
+    .mosaic-label {
+        font-size: 0.55rem;
+        padding: 3px 6px;
+        white-space: nowrap;
     }
 
     .footer {
@@ -1520,6 +1666,13 @@ a {
         width: 36px;
         height: 36px;
         font-size: 0.9rem;
+    }
+
+    .social-links a[title="LinkedIn"],
+    .social-links a[title="Instagram"] {
+        width: 40px;
+        height: 40px;
+        font-size: 1.05rem;
     }
 }
 
