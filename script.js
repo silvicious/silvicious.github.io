@@ -15,9 +15,9 @@ document.addEventListener('DOMContentLoaded', () => {
     const snapcodePopupBackdrop = document.getElementById('snapcodePopupBackdrop');
     const closeSnapcodePopup = document.getElementById('closeSnapcodePopup');
     const snapcodeImage = document.getElementById('snapcodeImage');
+    const snapcodeImageLink = document.getElementById('snapcodeImageLink');
     const snapcodeVideoWrap = document.getElementById('snapcodeVideoWrap');
     const snapcodeVideo = document.getElementById('snapcodeVideo');
-    const snapcodeVideoMute = document.getElementById('snapcodeVideoMute');
 
 
     // Scroll behavior for navbar
@@ -121,34 +121,49 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     if (snapcodePopup && snapcodeImage) {
-        const openSnapcodePopup = (src, label, videoSrc) => {
+        const normalizeSnapcodeVideoUrl = (rawUrl) => {
+            const value = String(rawUrl || '').trim();
+            if (!value) return '';
+
+            const match = value.match(/(?:player\.vimeo\.com\/video\/|vimeo\.com\/(?:video\/)?)(\d+)/i);
+            if (match && match[1]) {
+                const videoId = match[1];
+                const params = new URLSearchParams({
+                    autoplay: '1',
+                    muted: '1',
+                    loop: '1',
+                    autopause: '0',
+                    playsinline: '1',
+                    controls: '0',
+                    title: '0',
+                    byline: '0',
+                    portrait: '0'
+                });
+
+                return `https://player.vimeo.com/video/${videoId}?${params.toString()}`;
+            }
+
+            const instagramMatch = value.match(/instagram\.com\/reel\/([^/?#]+)/i);
+            if (instagramMatch && instagramMatch[1]) {
+                return `https://www.instagram.com/reel/${instagramMatch[1]}/embed`;
+            }
+
+            return value;
+        };
+
+        const openSnapcodePopup = (src, label, videoSrc, imageLink) => {
             snapcodeImage.src = src;
             snapcodeImage.alt = label ? `${label} snapcode` : 'Snapcode';
-            const hasVideo = Boolean(videoSrc && snapcodeVideo && snapcodeVideoWrap);
+            if (snapcodeImageLink) {
+                snapcodeImageLink.href = imageLink || '#';
+                snapcodeImageLink.style.pointerEvents = imageLink ? 'auto' : 'none';
+            }
+            const resolvedVideoSrc = normalizeSnapcodeVideoUrl(videoSrc);
+            const hasVideo = Boolean(resolvedVideoSrc && snapcodeVideo && snapcodeVideoWrap);
             if (hasVideo) {
-                snapcodeVideo.src = videoSrc;
+                snapcodeVideo.src = resolvedVideoSrc;
                 snapcodeVideoWrap.classList.add('is-visible');
                 snapcodePopup.classList.add('has-video');
-                if (snapcodeVideoMute) {
-                    snapcodeVideoMute.dataset.muted = '0';
-                    snapcodeVideoMute.setAttribute('aria-label', 'Sound on');
-                    const icon = snapcodeVideoMute.querySelector('i');
-                    if (icon) {
-                        icon.classList.remove('fa-volume-xmark');
-                        icon.classList.add('fa-volume-high');
-                    }
-                }
-                const unmuteVideo = () => {
-                    postToVimeo(snapcodeVideo, 'setMuted', false);
-                    postToVimeo(snapcodeVideo, 'setVolume', 1);
-                    postToVimeo(snapcodeVideo, 'play');
-                    window.setTimeout(() => {
-                        postToVimeo(snapcodeVideo, 'setMuted', false);
-                        postToVimeo(snapcodeVideo, 'setVolume', 1);
-                    }, 220);
-                    snapcodeVideo.removeEventListener('load', unmuteVideo);
-                };
-                snapcodeVideo.addEventListener('load', unmuteVideo);
             } else if (snapcodeVideo && snapcodeVideoWrap) {
                 snapcodeVideo.src = '';
                 snapcodeVideoWrap.classList.remove('is-visible');
@@ -162,13 +177,14 @@ document.addEventListener('DOMContentLoaded', () => {
             snapcodePopup.classList.remove('is-open');
             snapcodePopup.setAttribute('aria-hidden', 'true');
             snapcodeImage.src = '';
+            if (snapcodeImageLink) {
+                snapcodeImageLink.href = '#';
+                snapcodeImageLink.style.pointerEvents = 'none';
+            }
             if (snapcodeVideo && snapcodeVideoWrap) {
                 snapcodeVideo.src = '';
                 snapcodeVideoWrap.classList.remove('is-visible');
                 snapcodePopup.classList.remove('has-video');
-                if (snapcodeVideoMute) {
-                    snapcodeVideoMute.dataset.muted = '0';
-                }
             }
         };
 
@@ -177,7 +193,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 e.stopPropagation();
                 const src = btn.dataset.snapcode;
                 if (!src) return;
-                openSnapcodePopup(src, btn.textContent.trim(), btn.dataset.snapcodeVideo || '');
+                openSnapcodePopup(src, btn.textContent.trim(), btn.dataset.snapcodeVideo || '', btn.dataset.snapcodeLink || '');
             });
         });
 
@@ -190,34 +206,6 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         });
 
-        if (snapcodeVideoMute && snapcodeVideo) {
-            snapcodeVideoMute.addEventListener('click', (e) => {
-                e.stopPropagation();
-                const icon = snapcodeVideoMute.querySelector('i');
-                const isMuted = snapcodeVideoMute.dataset.muted === '1';
-
-                if (isMuted) {
-                    postToVimeo(snapcodeVideo, 'setMuted', false);
-                    postToVimeo(snapcodeVideo, 'setVolume', 1);
-                    postToVimeo(snapcodeVideo, 'play');
-                    snapcodeVideoMute.dataset.muted = '0';
-                    snapcodeVideoMute.setAttribute('aria-label', 'Sound on');
-                    if (icon) {
-                        icon.classList.remove('fa-volume-xmark');
-                        icon.classList.add('fa-volume-high');
-                    }
-                } else {
-                    postToVimeo(snapcodeVideo, 'setMuted', true);
-                    postToVimeo(snapcodeVideo, 'setVolume', 0);
-                    snapcodeVideoMute.dataset.muted = '1';
-                    snapcodeVideoMute.setAttribute('aria-label', 'Sound off');
-                    if (icon) {
-                        icon.classList.remove('fa-volume-high');
-                        icon.classList.add('fa-volume-xmark');
-                    }
-                }
-            });
-        }
     }
 
     // Intersection observer for subtle entrance animations
@@ -445,6 +433,7 @@ document.addEventListener('DOMContentLoaded', () => {
         const message = { method };
         if (typeof value !== 'undefined') message.value = value;
         iframe.contentWindow.postMessage(message, '*');
+        iframe.contentWindow.postMessage(JSON.stringify(message), '*');
     };
 
     const iframeCoverSelector = 'iframe.vimeo-embed, iframe.hover-vimeo, iframe.mosaic-vimeo, iframe.split-vimeo';
