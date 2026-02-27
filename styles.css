@@ -1428,7 +1428,7 @@ a {
     .about-content {
         grid-template-columns: 1fr;
         gap: 3rem;
-        padding: 114px 30px 0;
+        padding: 46px 30px 0;
     }
 
     .about-text {
@@ -1436,7 +1436,12 @@ a {
     }
 
     .about-text p {
-        font-size: 0.95rem;
+        font-size: 1rem;
+    }
+
+    .about-intro-line {
+        font-size: clamp(0.9rem, 2.7vw, 1rem);
+        white-space: nowrap;
     }
 
     .about-image {
@@ -1641,7 +1646,7 @@ a {
     }
 
     .about-content {
-        padding: 98px 20px 0;
+        padding: 34px 20px 0;
     }
 
     .about-image {
@@ -1668,7 +1673,12 @@ a {
     }
 
     .about-text p {
-        font-size: 0.88rem;
+        font-size: 0.94rem;
+    }
+
+    .about-intro-line {
+        font-size: clamp(0.82rem, 3.7vw, 0.94rem);
+        white-space: nowrap;
     }
 
     .theme-card {
