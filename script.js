@@ -356,7 +356,8 @@ document.addEventListener('DOMContentLoaded', () => {
                     const [metaText, ...tagSegments] = part.split('|').map(value => value.trim());
                     const tagText = tagSegments.join('|').trim();
                     const metaSpan = document.createElement('span');
-                    appendLinkedText(metaSpan, metaText || part);
+                    const resolvedMetaText = metaText || '';
+                    appendLinkedText(metaSpan, resolvedMetaText);
                     p.appendChild(metaSpan);
 
                     if (tagText) {
