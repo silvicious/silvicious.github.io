@@ -706,7 +706,7 @@ document.addEventListener('DOMContentLoaded', () => {
     splitThirdPortfolioSlidesForMobile();
     applyIframeCoverSizing();
 
-    const sharedSoundtrackItemIndexes = new Set(['0', '2']);
+    const sharedSoundtrackItemIndexes = new Set(['0', '1', '2']);
 
     const getMasterSoundtrackIframe = (slider) => {
         if (!slider) return null;
