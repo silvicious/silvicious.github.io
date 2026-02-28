@@ -706,6 +706,49 @@ document.addEventListener('DOMContentLoaded', () => {
     splitThirdPortfolioSlidesForMobile();
     applyIframeCoverSizing();
 
+    const sharedSoundtrackItemIndexes = new Set(['0', '2']);
+
+    const getMasterSoundtrackIframe = (slider) => {
+        if (!slider) return null;
+        const firstSlide = slider.querySelector('.project-slide');
+        if (!firstSlide) return null;
+        return firstSlide.querySelector('iframe.vimeo-embed') || firstSlide.querySelector('iframe');
+    };
+
+    const setSliderAudioButtonsState = (slider, isMuted) => {
+        if (!slider) return;
+        slider.querySelectorAll('.video-audio').forEach((button) => {
+            const icon = button.querySelector('i');
+            button.dataset.muted = isMuted ? '1' : '0';
+            if (icon) {
+                icon.classList.toggle('fa-volume-xmark', isMuted);
+                icon.classList.toggle('fa-volume-high', !isMuted);
+            }
+            button.setAttribute('aria-label', isMuted ? 'Sound off' : 'Sound on');
+        });
+    };
+
+    const syncSharedSoundtracks = () => {
+        document.querySelectorAll('.portfolio-item').forEach((item) => {
+            const itemIndex = String(item.dataset.index || '');
+            if (!sharedSoundtrackItemIndexes.has(itemIndex)) return;
+
+            const slider = item.querySelector('.project-slider');
+            if (!slider) return;
+
+            const isMuted = slider.dataset.soundtrackMuted !== '0';
+            const masterIframe = getMasterSoundtrackIframe(slider);
+            if (!masterIframe) return;
+
+            if (isMuted) {
+                postToVimeo(masterIframe, 'setVolume', 0);
+            } else {
+                postToVimeo(masterIframe, 'play');
+                postToVimeo(masterIframe, 'setVolume', 1);
+            }
+        });
+    };
+
     sliders.forEach((slider) => {
         const track = slider.querySelector('.project-track');
         const slides = slider.querySelectorAll('.project-slide');
@@ -719,6 +762,7 @@ document.addEventListener('DOMContentLoaded', () => {
             slider.dataset.index = String(index);
             track.style.transform = `translateX(${-index * 100}%)`;
             playVisibleVimeo();
+            syncSharedSoundtracks();
         };
 
         if (prevBtn) {
@@ -753,6 +797,28 @@ document.addEventListener('DOMContentLoaded', () => {
     document.querySelectorAll('.video-audio').forEach((btn) => {
         btn.addEventListener('click', (e) => {
             e.stopPropagation();
+            const slider = btn.closest('.project-slider');
+            const portfolioItem = btn.closest('.portfolio-item');
+            const itemIndex = portfolioItem ? String(portfolioItem.dataset.index || '') : '';
+
+            if (slider && sharedSoundtrackItemIndexes.has(itemIndex)) {
+                const isMuted = slider.dataset.soundtrackMuted !== '0';
+                const nextMuted = !isMuted;
+                slider.dataset.soundtrackMuted = nextMuted ? '1' : '0';
+                setSliderAudioButtonsState(slider, nextMuted);
+
+                const masterIframe = getMasterSoundtrackIframe(slider);
+                if (!masterIframe) return;
+
+                if (nextMuted) {
+                    postToVimeo(masterIframe, 'setVolume', 0);
+                } else {
+                    postToVimeo(masterIframe, 'play');
+                    postToVimeo(masterIframe, 'setVolume', 1);
+                }
+                return;
+            }
+
             const slide = btn.closest('.project-slide');
             const container = btn.parentElement;
             const iframe = (container && container.querySelector('iframe')) || (slide && slide.querySelector('iframe'));
@@ -793,12 +859,22 @@ document.addEventListener('DOMContentLoaded', () => {
 
     window.addEventListener('scroll', () => {
         playVisibleVimeo();
+        syncSharedSoundtracks();
     });
 
     window.addEventListener('load', () => {
         applyIframeCoverSizing();
         playVisibleVimeo();
         muteAllVimeo();
+        document.querySelectorAll('.portfolio-item').forEach((item) => {
+            const itemIndex = String(item.dataset.index || '');
+            if (!sharedSoundtrackItemIndexes.has(itemIndex)) return;
+            const slider = item.querySelector('.project-slider');
+            if (!slider) return;
+            slider.dataset.soundtrackMuted = '1';
+            setSliderAudioButtonsState(slider, true);
+        });
+        syncSharedSoundtracks();
         const startAtIframes = document.querySelectorAll('iframe[data-start]');
         startAtIframes.forEach((iframe) => {
             const startAt = Number(iframe.dataset.start || 0);
