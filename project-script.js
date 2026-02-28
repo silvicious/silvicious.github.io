@@ -2,7 +2,7 @@
 const projects = {
     1: {
         title: "uvw",
-        category: "Digital Fashion",
+        category: "Speculative Design",
         shortDescription: "Exploring the intersection of bio-tech and fashion, imagining garments that adapt to our bodies and environments in speculative futures.",
         overview: "The uvw is a digital fashion collection inspired by the interplay of light and matter in physical versus digital realities.",
         process: "Light in the physical world is governed by physical laws, while in computer graphics, light knows no bounds.",
@@ -14,9 +14,9 @@ const projects = {
         ]
     },
     2: {
-        title: "Circular Narratives",
+        title: "SpooktaculAR",
         category: "Digital Fashion",
-        shortDescription: "Digital design solutions for circular fashion systems, exploring how technology can create sustainable narratives and reduce waste.",
+        shortDescription: "What if the most horrifying thing about your Halloween costume wasn't the oil-based plastics, the one-time wear, or the landfill afterlife? If you're craving to look terrifying but worried you might regret it, fear not. I've created spooky AR costumes that deliver the fright and none of the horror.",
         overview: "Circular Narratives investigates how digital fashion and virtual clothing can offer sustainable alternatives to physical fashion production. The project proposes systems where digital garments can be owned, traded, and modified in virtual spaces without material waste.",
         process: "Research included interviews with sustainability experts, analysis of current circular economy models, and development of digital platforms for virtual clothing exchange. We created a proof-of-concept blockchain-based system for tracking digital garment ownership.",
         outcome: "The project includes a working prototype platform, design documentation, and a case study on how digital fashion could reduce environmental impact by 50% compared to traditional fashion.",
@@ -27,7 +27,7 @@ const projects = {
         ]
     },
     3: {
-        title: "Glitch Couture",
+        title: "voronoi",
         category: "XR Fashion",
         shortDescription: "Radical experimentation with digital aesthetics, glitch art, and fashion design to challenge traditional notions of beauty and perfection.",
         overview: "Glitch Couture is an experimental project that embraces digital imperfections and glitch aesthetics as a form of radical fashion design. It challenges the fashion industry's obsession with perfection by celebrating errors, artifacts, and unexpected digital phenomena.",
@@ -40,7 +40,7 @@ const projects = {
         ]
     },
     4: {
-        title: "Biometric Wear",
+        title: "End Block",
         category: "Performance",
         shortDescription: "Speculating on wearable technology integrated into fashion, exploring how garments could monitor and respond to human biometric data.",
         overview: "Biometric Wear speculates on a future where fashion garments are embedded with sensors and respond to the wearer's biometric data. The project explores how clothing could become more personal and intelligent through technology integration.",
@@ -53,7 +53,7 @@ const projects = {
         ]
     },
     5: {
-        title: "Waste to Wonder",
+        title: "Boredom-proof Checkout",
         category: "Intervention",
         shortDescription: "Transforming digital waste and obsolete materials into speculative fashion designs that tell stories of sustainability and innovation.",
         overview: "Waste to Wonder explores how digital waste and obsolete technology can be transformed into speculative fashion designs. The project tells stories of circular material cycles and gives new life to discarded items through fashion.",
@@ -66,7 +66,7 @@ const projects = {
         ]
     },
     6: {
-        title: "Boundary Breaking",
+        title: "Trick-or-Treat",
         category: "Craftvism",
         shortDescription: "Radical experiments that challenge the boundaries between fashion, art, and technology—pushing the conventions of digital design.",
         overview: "Boundary Breaking is a series of experimental projects that intentionally blur the lines between fashion, art installation, and interactive technology. It challenges conventional understandings of what fashion can be.",

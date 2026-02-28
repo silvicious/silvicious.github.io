@@ -38,45 +38,45 @@
     "items": [
       {
         "id": 1,
-        "title": "Future Skins",
+        "title": "uvw",
         "category": "speculative",
         "image": "https://via.placeholder.com/400x500?text=Future+Wear",
         "description": "Speculative Design"
       },
       {
         "id": 2,
-        "title": "Circular Narratives",
-        "category": "sustainable",
+        "title": "SpooktaculAR",
+        "category": "digital-fashion",
         "image": "https://via.placeholder.com/400x500?text=Circular+Fashion",
-        "description": "Sustainable Design"
+        "description": "Digital Fashion"
       },
       {
         "id": 3,
-        "title": "Glitch Couture",
-        "category": "experimental",
+        "title": "voronoi",
+        "category": "xr-fashion",
         "image": "https://via.placeholder.com/400x500?text=Digital+Fabric",
-        "description": "Experimental Project"
+        "description": "XR Fashion"
       },
       {
         "id": 4,
-        "title": "Biometric Wear",
-        "category": "speculative",
+        "title": "End Block",
+        "category": "performance",
         "image": "https://via.placeholder.com/400x500?text=Tech+Fashion",
-        "description": "Speculative Design"
+        "description": "Performance"
       },
       {
         "id": 5,
-        "title": "Waste to Wonder",
-        "category": "sustainable",
+        "title": "Boredom-proof Checkout",
+        "category": "intervention",
         "image": "https://via.placeholder.com/400x500?text=Upcycled",
-        "description": "Sustainable Innovation"
+        "description": "Intervention"
       },
       {
         "id": 6,
-        "title": "Boundary Breaking",
-        "category": "experimental",
+        "title": "Trick-or-Treat",
+        "category": "craftvism",
         "image": "https://via.placeholder.com/400x500?text=Radical+Design",
-        "description": "Experimental Design"
+        "description": "Craftvism"
       }
     ]
   },
