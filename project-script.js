@@ -29,7 +29,7 @@ const projects = {
     3: {
         title: "voronoi",
         category: "XR Fashion",
-        shortDescription: "Radical experimentation with digital aesthetics, glitch art, and fashion design to challenge traditional notions of beauty and perfection.",
+        shortDescription: "What if we co-design with the computer, inviting <em>coincidence</em> into the creative process, only to realize that randomness is a pattern still beyond our perception? Is what we call creative agency nothing more than a play of logic we cannot consciously grasp?",
         overview: "Glitch Couture is an experimental project that embraces digital imperfections and glitch aesthetics as a form of radical fashion design. It challenges the fashion industry's obsession with perfection by celebrating errors, artifacts, and unexpected digital phenomena.",
         process: "The project involved creating custom glitch algorithms, experimenting with corrupted 3D models, and developing a visual language around digital imperfection. We collaborated with digital artists to create a collection of glitched fashion designs.",
         outcome: "The project resulted in a limited edition digital collection and an exhibition exploring how imperfection can be beautiful. It sparked conversations about perfectionism in fashion and digital design.",
