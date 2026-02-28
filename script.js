@@ -302,13 +302,36 @@ document.addEventListener('DOMContentLoaded', () => {
             if (!parts.length) return;
             const appendLinkedText = (target, value) => {
                 const source = String(value || '');
+                const appendInlineText = (node, text) => {
+                    const valueText = String(text || '');
+                    const emphasisPattern = /_([^_]+)_/g;
+                    let inlineLastIndex = 0;
+                    let inlineMatch;
+
+                    while ((inlineMatch = emphasisPattern.exec(valueText)) !== null) {
+                        if (inlineMatch.index > inlineLastIndex) {
+                            node.appendChild(document.createTextNode(valueText.slice(inlineLastIndex, inlineMatch.index)));
+                        }
+
+                        const emphasis = document.createElement('em');
+                        emphasis.textContent = inlineMatch[1];
+                        node.appendChild(emphasis);
+
+                        inlineLastIndex = inlineMatch.index + inlineMatch[0].length;
+                    }
+
+                    if (inlineLastIndex < valueText.length) {
+                        node.appendChild(document.createTextNode(valueText.slice(inlineLastIndex)));
+                    }
+                };
+
                 const linkPattern = /\[([^\]]+)\]\((https?:\/\/[^\s)]+)\)/g;
                 let lastIndex = 0;
                 let match;
 
                 while ((match = linkPattern.exec(source)) !== null) {
                     if (match.index > lastIndex) {
-                        target.appendChild(document.createTextNode(source.slice(lastIndex, match.index)));
+                        appendInlineText(target, source.slice(lastIndex, match.index));
                     }
 
                     const anchor = document.createElement('a');
@@ -322,7 +345,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 }
 
                 if (lastIndex < source.length) {
-                    target.appendChild(document.createTextNode(source.slice(lastIndex)));
+                    appendInlineText(target, source.slice(lastIndex));
                 }
             };
 
@@ -349,7 +372,7 @@ document.addEventListener('DOMContentLoaded', () => {
                         p.appendChild(tagsWrap);
                     }
                 } else {
-                    p.textContent = part;
+                    appendLinkedText(p, part);
                 }
                 popupDescription.appendChild(p);
             });
