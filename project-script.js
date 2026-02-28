@@ -42,27 +42,27 @@ const projects = {
     4: {
         title: "End Block",
         category: "Performance",
-        shortDescription: "Speculating on wearable technology integrated into fashion, exploring how garments could monitor and respond to human biometric data.",
-        overview: "Biometric Wear speculates on a future where fashion garments are embedded with sensors and respond to the wearer's biometric data. The project explores how clothing could become more personal and intelligent through technology integration.",
-        process: "We researched emerging wearable technologies, conducted user interviews about desired features, and created detailed concept mockups. The design process included prototyping interactions and visualizing data visualization within fashion design.",
-        outcome: "The project includes interactive prototypes, design scenarios, and a comprehensive design guide for integrating biometric sensing into fashion. It has been featured in multiple tech and fashion publications.",
+        shortDescription: "What if blockchain kept score of the clothes we leave behind? Would a personal disposal allowance shift us toward repair, exchange, and a higher sense of ownership? What if a system-imposed limit was the key to elevating your wardrobe?",
+        overview: "End Block imagines a wardrobe economy where every person has a finite disposal allowance recorded on blockchain. Instead of treating garments as disposable, the project reframes clothing as accountable assets with visible afterlives.",
+        process: "The work maps how a scoring ledger, disposal limits, and ownership records could influence behavior over time. Through speculative scenarios, the project tests how repair, exchange, and long-term care become more attractive when disposal has a measurable cost.",
+        outcome: "End Block proposes a system narrative where limits elevate value: people buy with intention, keep items in circulation longer, and build stronger relationships with what they own. The project positions constraint as a design tool for more responsible wardrobe culture.",
         images: [
-            "https://via.placeholder.com/800x600?text=Biometric+Wear+1",
-            "https://via.placeholder.com/800x600?text=Biometric+Wear+2",
-            "https://via.placeholder.com/800x600?text=Biometric+Wear+3"
+            "https://via.placeholder.com/800x600?text=End+Block+1",
+            "https://via.placeholder.com/800x600?text=End+Block+2",
+            "https://via.placeholder.com/800x600?text=End+Block+3"
         ]
     },
     5: {
         title: "Boredom-proof Checkout",
         category: "Intervention",
-        shortDescription: "Transforming digital waste and obsolete materials into speculative fashion designs that tell stories of sustainability and innovation.",
-        overview: "Waste to Wonder explores how digital waste and obsolete technology can be transformed into speculative fashion designs. The project tells stories of circular material cycles and gives new life to discarded items through fashion.",
-        process: "We researched digital waste streams, documented obsolete technology lifecycles, and created digital designs inspired by these materials. The project includes 3D scans of e-waste and AI-generated design variations.",
-        outcome: "A fully realized digital collection with accompanying documentation about material sustainability. The project has been exhibited in several galleries and sparked community discussions about waste and fashion.",
+        shortDescription: "What if paying wasn’t effortless? Could a mini game in the checkout process interrupt impulse buying? Could a moment of distraction break the cycle of instant gratification and reveal whether the purchase is driven by desire or simply boredom?",
+        overview: "Boredom-proof Checkout reframes payment as a reflective pause rather than a frictionless finish. By inserting a short mini game at checkout, the project tests whether momentary interruption can expose impulse behavior and create space for intentional decision-making.",
+        process: "The intervention maps the emotional arc of online buying and identifies the instant-gratification moment where impulse is strongest. A lightweight mini game is placed before payment confirmation to introduce cognitive delay, redirect attention, and prompt users to reassess whether they still want the item.",
+        outcome: "The concept proposes checkout friction as a behavioral design tool: not to block purchases, but to make desire more conscious. By turning a split-second transaction into a brief reflection, the project reveals when purchases are genuinely wanted versus driven by boredom.",
         images: [
-            "https://via.placeholder.com/800x600?text=Waste+to+Wonder+1",
-            "https://via.placeholder.com/800x600?text=Waste+to+Wonder+2",
-            "https://via.placeholder.com/800x600?text=Waste+to+Wonder+3"
+            "https://via.placeholder.com/800x600?text=Boredom-proof+Checkout+1",
+            "https://via.placeholder.com/800x600?text=Boredom-proof+Checkout+2",
+            "https://via.placeholder.com/800x600?text=Boredom-proof+Checkout+3"
         ]
     },
     6: {
